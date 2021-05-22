@@ -4,5 +4,12 @@ service cloud.firestore {
     match /pax/{paxId}/{document=**}  {
       allow read, write: if request.auth != null && (paxId == request.auth.token.sub || get(/databases/$(database)/documents/pax/$(request.auth.token.sub)).data.is_supervisor == true);
     }
+    match /{path=**}/days/{doc} {
+    	allow read: if request.auth != null && get(/databases/$(database)/documents/pax/$(request.auth.token.sub)).data.is_supervisor == true;
+    }
+    match /{path=**}/requests/{doc} {
+    	allow read: if request.auth != null && get(/databases/$(database)/documents/pax/$(request.auth.token.sub)).data.is_supervisor == true;
+    }
+
   }
 }
