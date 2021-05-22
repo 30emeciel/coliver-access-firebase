@@ -1,9 +1,3 @@
 steps:
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:341.0.0-alpine'
-  entrypoint: 'gsutil'
-  args:
-    - cp
-    - gs://env-config.30emeciel.fr/live-web.env
-    - .env
 - name: gcr.io/trentiemeciel/firebase
-  args: ['deploy', '--project=$PROJECT_ID', '--only=hosting', '-m', '$TAG_NAME build $SHORT_SHA']
+  args: ['deploy', '--project=$PROJECT_ID', '-m', '$TAG_NAME build $SHORT_SHA']
