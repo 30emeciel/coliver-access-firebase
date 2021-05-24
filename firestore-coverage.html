@@ -1,0 +1,4638 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Firestore Rule Coverage Report</title>
+<style>
+.coverage-expr {
+  padding-bottom: 4px;
+  display: inline-block;
+  border-bottom: 3px solid black;
+  vertical-align: top;
+}
+.coverage-expr:hover {
+  background-color: rgba(255, 100, 100, 0.2);
+  cursor: default;
+  border-bottom: 3px solid red;
+}
+</style>
+
+<script>
+// Populated by the emulator at runtime
+const data = {
+  "rules": {
+    "files": [{
+      "content": "rules_version \u003d \u00272\u0027;\nservice cloud.firestore {\n  match /databases/{database}/documents {\n\n    \n    function isSupervisor() {\n      return get(/databases/$(database)/documents/pax/$(request.auth.token.sub)).data.is_supervisor \u003d\u003d true;\n    }\n    \n    function signedIn() {\n      return request.auth.uid !\u003d null;\n    }\n\n    function isOwnPaxData(paxId) {\n      return paxId \u003d\u003d request.auth.token.sub\n    }\n\n    function isAccessSupervisor() {\n      return request.resource.data.diff(resource.data).affectedKeys().hasAny([\u0027is_supervisor\u0027])\n    }\n\n    match /pax/{paxId}/{document\u003d**}  {\n      allow read: if signedIn() \u0026\u0026 (isOwnPaxData(paxId) || isSupervisor());\n      allow write: if signedIn() \u0026\u0026 ((isOwnPaxData(paxId) \u0026\u0026 !isAccessSupervisor()) || isSupervisor());\n    }\n\n    match /pax/{paxId}/requests/{requestId}  {\n      allow read, write: if signedIn() \u0026\u0026 (isOwnPaxData(paxId) || isSupervisor());\n    }\n\n\t\tmatch /pax/{paxId}/days/{dayId}  {\n      allow read, write: if signedIn() \u0026\u0026 (isOwnPaxData(paxId) || isSupervisor());\n    }\n\n    match /{path\u003d**}/days/{doc} {\n    \tallow read: if signedIn() \u0026\u0026 isSupervisor();\n    }\n    match /{path\u003d**}/requests/{doc} {\n    \tallow read: if signedIn() \u0026\u0026 isSupervisor();\n    }\n\n  }\n}",
+      "name": "C:\\Users\\totob\\PycharmProjects\\coliver-access-firestore\\firestore.rules"
+    }]
+  },
+  "report": [{
+    "sourcePosition": {
+      "line": 7,
+      "column": 14,
+      "currentOffset": 138,
+      "endOffset": 231
+    },
+    "values": [{
+      "value": {
+        "undefined": {
+          "sourcePosition": {
+            "line": 7,
+            "column": 57,
+            "currentOffset": 181,
+            "endOffset": 187
+          },
+          "causeMessage": "Null value error."
+        }
+      },
+      "count": 1
+    }, {
+      "value": {
+        "undefined": {
+          "sourcePosition": {
+            "line": 7,
+            "column": 14,
+            "currentOffset": 138,
+            "endOffset": 140
+          },
+          "causeMessage": "Null value error."
+        }
+      },
+      "count": 1
+    }, {
+      "value": {
+        "boolValue": true
+      },
+      "count": 1
+    }, {
+      "value": {
+        "undefined": {
+          "sourcePosition": {
+            "line": 7,
+            "column": 14,
+            "currentOffset": 138,
+            "endOffset": 140
+          },
+          "causeMessage": "Service call error. Function: [get], Argument: [path_value {\n  segments {\n    simple: \"databases\"\n  }\n  segments {\n    simple: \"(default)\"\n  }\n  segments {\n    simple: \"documents\"\n  }\n  segments {\n    simple: \"pax\"\n  }\n  segments {\n    simple: \"alice\"\n  }\n}\n]."
+        }
+      },
+      "count": 2
+    }],
+    "children": [{
+      "sourcePosition": {
+        "line": 7,
+        "column": 14,
+        "currentOffset": 138,
+        "endOffset": 223
+      },
+      "values": [{
+        "value": {
+          "undefined": {
+            "sourcePosition": {
+              "line": 7,
+              "column": 57,
+              "currentOffset": 181,
+              "endOffset": 187
+            },
+            "causeMessage": "Null value error."
+          }
+        },
+        "count": 1
+      }, {
+        "value": {
+          "undefined": {
+            "sourcePosition": {
+              "line": 7,
+              "column": 14,
+              "currentOffset": 138,
+              "endOffset": 140
+            },
+            "causeMessage": "Null value error."
+          }
+        },
+        "count": 1
+      }, {
+        "value": {
+          "boolValue": true
+        },
+        "count": 1
+      }, {
+        "value": {
+          "undefined": {
+            "sourcePosition": {
+              "line": 7,
+              "column": 14,
+              "currentOffset": 138,
+              "endOffset": 140
+            },
+            "causeMessage": "Service call error. Function: [get], Argument: [path_value {\n  segments {\n    simple: \"databases\"\n  }\n  segments {\n    simple: \"(default)\"\n  }\n  segments {\n    simple: \"documents\"\n  }\n  segments {\n    simple: \"pax\"\n  }\n  segments {\n    simple: \"alice\"\n  }\n}\n]."
+          }
+        },
+        "count": 2
+      }],
+      "children": [{
+        "sourcePosition": {
+          "line": 7,
+          "column": 14,
+          "currentOffset": 138,
+          "endOffset": 209
+        },
+        "values": [{
+          "value": {
+            "undefined": {
+              "sourcePosition": {
+                "line": 7,
+                "column": 57,
+                "currentOffset": 181,
+                "endOffset": 187
+              },
+              "causeMessage": "Null value error."
+            }
+          },
+          "count": 1
+        }, {
+          "value": {
+            "undefined": {
+              "sourcePosition": {
+                "line": 7,
+                "column": 14,
+                "currentOffset": 138,
+                "endOffset": 140
+              },
+              "causeMessage": "Null value error."
+            }
+          },
+          "count": 1
+        }, {
+          "value": {
+            "mapValue": {
+              "fields": {
+                "is_supervisor": {
+                  "boolValue": true
+                }
+              }
+            }
+          },
+          "count": 1
+        }, {
+          "value": {
+            "undefined": {
+              "sourcePosition": {
+                "line": 7,
+                "column": 14,
+                "currentOffset": 138,
+                "endOffset": 140
+              },
+              "causeMessage": "Service call error. Function: [get], Argument: [path_value {\n  segments {\n    simple: \"databases\"\n  }\n  segments {\n    simple: \"(default)\"\n  }\n  segments {\n    simple: \"documents\"\n  }\n  segments {\n    simple: \"pax\"\n  }\n  segments {\n    simple: \"alice\"\n  }\n}\n]."
+            }
+          },
+          "count": 2
+        }],
+        "children": [{
+          "sourcePosition": {
+            "line": 7,
+            "column": 14,
+            "currentOffset": 138,
+            "endOffset": 202
+          },
+          "values": [{
+            "value": {
+              "undefined": {
+                "sourcePosition": {
+                  "line": 7,
+                  "column": 57,
+                  "currentOffset": 181,
+                  "endOffset": 187
+                },
+                "causeMessage": "Null value error."
+              }
+            },
+            "count": 1
+          }, {
+            "value": {
+              "nullValue": null
+            },
+            "count": 1
+          }, {
+            "value": {
+              "mapValue": {
+                "fields": {
+                  "data": {
+                    "mapValue": {
+                      "fields": {
+                        "is_supervisor": {
+                          "boolValue": true
+                        }
+                      }
+                    }
+                  },
+                  "__name__": {
+                    "pathValue": {
+                      "segments": [{
+                        "simple": "databases"
+                      }, {
+                        "simple": "(default)"
+                      }, {
+                        "simple": "documents"
+                      }, {
+                        "simple": "pax"
+                      }, {
+                        "simple": "john"
+                      }]
+                    }
+                  },
+                  "id": {
+                    "stringValue": "john"
+                  }
+                }
+              }
+            },
+            "count": 1
+          }, {
+            "value": {
+              "undefined": {
+                "sourcePosition": {
+                  "line": 7,
+                  "column": 14,
+                  "currentOffset": 138,
+                  "endOffset": 140
+                },
+                "causeMessage": "Service call error. Function: [get], Argument: [path_value {\n  segments {\n    simple: \"databases\"\n  }\n  segments {\n    simple: \"(default)\"\n  }\n  segments {\n    simple: \"documents\"\n  }\n  segments {\n    simple: \"pax\"\n  }\n  segments {\n    simple: \"alice\"\n  }\n}\n]."
+              }
+            },
+            "count": 2
+          }],
+          "children": [{
+            "sourcePosition": {
+              "line": 7,
+              "column": 18,
+              "currentOffset": 142,
+              "endOffset": 202
+            },
+            "values": [{
+              "value": {
+                "undefined": {
+                  "sourcePosition": {
+                    "line": 7,
+                    "column": 57,
+                    "currentOffset": 181,
+                    "endOffset": 187
+                  },
+                  "causeMessage": "Null value error."
+                }
+              },
+              "count": 1
+            }, {
+              "value": {
+                "pathValue": {
+                  "segments": [{
+                    "simple": "databases"
+                  }, {
+                    "simple": "(default)"
+                  }, {
+                    "simple": "documents"
+                  }, {
+                    "simple": "pax"
+                  }, {
+                    "simple": "alice"
+                  }]
+                }
+              },
+              "count": 3
+            }, {
+              "value": {
+                "pathValue": {
+                  "segments": [{
+                    "simple": "databases"
+                  }, {
+                    "simple": "(default)"
+                  }, {
+                    "simple": "documents"
+                  }, {
+                    "simple": "pax"
+                  }, {
+                    "simple": "john"
+                  }]
+                }
+              },
+              "count": 1
+            }],
+            "children": [{
+              "sourcePosition": {
+                "line": 7,
+                "column": 31,
+                "currentOffset": 155,
+                "endOffset": 162
+              },
+              "values": [{
+                "value": {
+                  "stringValue": "(default)"
+                },
+                "count": 5
+              }]
+            }, {
+              "sourcePosition": {
+                "line": 7,
+                "column": 57,
+                "currentOffset": 181,
+                "endOffset": 202
+              },
+              "values": [{
+                "value": {
+                  "undefined": {
+                    "sourcePosition": {
+                      "line": 7,
+                      "column": 57,
+                      "currentOffset": 181,
+                      "endOffset": 187
+                    },
+                    "causeMessage": "Null value error."
+                  }
+                },
+                "count": 1
+              }, {
+                "value": {
+                  "stringValue": "alice"
+                },
+                "count": 3
+              }, {
+                "value": {
+                  "stringValue": "john"
+                },
+                "count": 1
+              }],
+              "children": [{
+                "sourcePosition": {
+                  "line": 7,
+                  "column": 57,
+                  "currentOffset": 181,
+                  "endOffset": 198
+                },
+                "values": [{
+                  "value": {
+                    "undefined": {
+                      "sourcePosition": {
+                        "line": 7,
+                        "column": 57,
+                        "currentOffset": 181,
+                        "endOffset": 187
+                      },
+                      "causeMessage": "Null value error."
+                    }
+                  },
+                  "count": 1
+                }, {
+                  "value": {
+                    "mapValue": {
+                      "fields": {
+                        "iss": {
+                          "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                        },
+                        "aud": {
+                          "stringValue": "firestore-emulator-example"
+                        },
+                        "iat": {
+                          "intValue": "0"
+                        },
+                        "exp": {
+                          "intValue": "3600"
+                        },
+                        "auth_time": {
+                          "intValue": "0"
+                        },
+                        "sub": {
+                          "stringValue": "alice"
+                        },
+                        "user_id": {
+                          "stringValue": "alice"
+                        },
+                        "firebase": {
+                          "mapValue": {
+                            "fields": {
+                              "sign_in_provider": {
+                                "stringValue": "custom"
+                              },
+                              "identities": {
+                                "mapValue": {
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "count": 3
+                }, {
+                  "value": {
+                    "mapValue": {
+                      "fields": {
+                        "iss": {
+                          "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                        },
+                        "aud": {
+                          "stringValue": "firestore-emulator-example"
+                        },
+                        "iat": {
+                          "intValue": "0"
+                        },
+                        "exp": {
+                          "intValue": "3600"
+                        },
+                        "auth_time": {
+                          "intValue": "0"
+                        },
+                        "sub": {
+                          "stringValue": "john"
+                        },
+                        "user_id": {
+                          "stringValue": "john"
+                        },
+                        "firebase": {
+                          "mapValue": {
+                            "fields": {
+                              "sign_in_provider": {
+                                "stringValue": "custom"
+                              },
+                              "identities": {
+                                "mapValue": {
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "count": 1
+                }],
+                "children": [{
+                  "sourcePosition": {
+                    "line": 7,
+                    "column": 57,
+                    "currentOffset": 181,
+                    "endOffset": 192
+                  },
+                  "values": [{
+                    "value": {
+                      "nullValue": null
+                    },
+                    "count": 1
+                  }, {
+                    "value": {
+                      "mapValue": {
+                        "fields": {
+                          "uid": {
+                            "stringValue": "alice"
+                          },
+                          "token": {
+                            "mapValue": {
+                              "fields": {
+                                "iss": {
+                                  "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                                },
+                                "aud": {
+                                  "stringValue": "firestore-emulator-example"
+                                },
+                                "iat": {
+                                  "intValue": "0"
+                                },
+                                "exp": {
+                                  "intValue": "3600"
+                                },
+                                "auth_time": {
+                                  "intValue": "0"
+                                },
+                                "sub": {
+                                  "stringValue": "alice"
+                                },
+                                "user_id": {
+                                  "stringValue": "alice"
+                                },
+                                "firebase": {
+                                  "mapValue": {
+                                    "fields": {
+                                      "sign_in_provider": {
+                                        "stringValue": "custom"
+                                      },
+                                      "identities": {
+                                        "mapValue": {
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "count": 3
+                  }, {
+                    "value": {
+                      "mapValue": {
+                        "fields": {
+                          "uid": {
+                            "stringValue": "john"
+                          },
+                          "token": {
+                            "mapValue": {
+                              "fields": {
+                                "iss": {
+                                  "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                                },
+                                "aud": {
+                                  "stringValue": "firestore-emulator-example"
+                                },
+                                "iat": {
+                                  "intValue": "0"
+                                },
+                                "exp": {
+                                  "intValue": "3600"
+                                },
+                                "auth_time": {
+                                  "intValue": "0"
+                                },
+                                "sub": {
+                                  "stringValue": "john"
+                                },
+                                "user_id": {
+                                  "stringValue": "john"
+                                },
+                                "firebase": {
+                                  "mapValue": {
+                                    "fields": {
+                                      "sign_in_provider": {
+                                        "stringValue": "custom"
+                                      },
+                                      "identities": {
+                                        "mapValue": {
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "count": 1
+                  }],
+                  "children": [{
+                    "sourcePosition": {
+                      "line": 7,
+                      "column": 57,
+                      "currentOffset": 181,
+                      "endOffset": 187
+                    },
+                    "values": [{
+                      "value": {
+                        "mapValue": {
+                          "fields": {
+                            "time": {
+                              "timestampValue": "2021-05-24T07:45:21.116Z"
+                            },
+                            "auth": {
+                              "nullValue": null
+                            },
+                            "headers": {
+                              "mapValue": {
+                              }
+                            },
+                            "inTransaction": {
+                              "boolValue": true
+                            },
+                            "path": {
+                              "pathValue": {
+                                "segments": [{
+                                  "simple": "databases"
+                                }, {
+                                  "simple": "(default)"
+                                }, {
+                                  "simple": "documents"
+                                }, {
+                                  "simple": "pax"
+                                }, {
+                                  "simple": "alice"
+                                }]
+                              }
+                            },
+                            "transforms": {
+                              "nullValue": null
+                            },
+                            "writeFields": {
+                              "nullValue": null
+                            },
+                            "readFields": {
+                              "nullValue": null
+                            },
+                            "resource": {
+                              "mapValue": {
+                                "fields": {
+                                  "data": {
+                                    "mapValue": {
+                                      "fields": {
+                                        "name": {
+                                          "stringValue": "Alice"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "__name__": {
+                                    "pathValue": {
+                                      "segments": [{
+                                        "simple": "databases"
+                                      }, {
+                                        "simple": "(default)"
+                                      }, {
+                                        "simple": "documents"
+                                      }, {
+                                        "simple": "pax"
+                                      }, {
+                                        "simple": "alice"
+                                      }]
+                                    }
+                                  },
+                                  "id": {
+                                    "stringValue": "alice"
+                                  }
+                                }
+                              }
+                            },
+                            "method": {
+                              "stringValue": "create"
+                            }
+                          }
+                        }
+                      },
+                      "count": 1
+                    }, {
+                      "value": {
+                        "mapValue": {
+                          "fields": {
+                            "time": {
+                              "timestampValue": "2021-05-24T07:45:21.798Z"
+                            },
+                            "auth": {
+                              "mapValue": {
+                                "fields": {
+                                  "uid": {
+                                    "stringValue": "alice"
+                                  },
+                                  "token": {
+                                    "mapValue": {
+                                      "fields": {
+                                        "iss": {
+                                          "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                                        },
+                                        "aud": {
+                                          "stringValue": "firestore-emulator-example"
+                                        },
+                                        "iat": {
+                                          "intValue": "0"
+                                        },
+                                        "exp": {
+                                          "intValue": "3600"
+                                        },
+                                        "auth_time": {
+                                          "intValue": "0"
+                                        },
+                                        "sub": {
+                                          "stringValue": "alice"
+                                        },
+                                        "user_id": {
+                                          "stringValue": "alice"
+                                        },
+                                        "firebase": {
+                                          "mapValue": {
+                                            "fields": {
+                                              "sign_in_provider": {
+                                                "stringValue": "custom"
+                                              },
+                                              "identities": {
+                                                "mapValue": {
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "headers": {
+                              "mapValue": {
+                              }
+                            },
+                            "inTransaction": {
+                              "boolValue": true
+                            },
+                            "path": {
+                              "pathValue": {
+                                "segments": [{
+                                  "simple": "databases"
+                                }, {
+                                  "simple": "(default)"
+                                }, {
+                                  "simple": "documents"
+                                }, {
+                                  "simple": "pax"
+                                }, {
+                                  "simple": "alice"
+                                }]
+                              }
+                            },
+                            "transforms": {
+                              "nullValue": null
+                            },
+                            "writeFields": {
+                              "nullValue": null
+                            },
+                            "readFields": {
+                              "nullValue": null
+                            },
+                            "resource": {
+                              "mapValue": {
+                                "fields": {
+                                  "data": {
+                                    "mapValue": {
+                                      "fields": {
+                                        "is_supervisor": {
+                                          "boolValue": true
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "__name__": {
+                                    "pathValue": {
+                                      "segments": [{
+                                        "simple": "databases"
+                                      }, {
+                                        "simple": "(default)"
+                                      }, {
+                                        "simple": "documents"
+                                      }, {
+                                        "simple": "pax"
+                                      }, {
+                                        "simple": "alice"
+                                      }]
+                                    }
+                                  },
+                                  "id": {
+                                    "stringValue": "alice"
+                                  }
+                                }
+                              }
+                            },
+                            "method": {
+                              "stringValue": "create"
+                            }
+                          }
+                        }
+                      },
+                      "count": 1
+                    }, {
+                      "value": {
+                        "mapValue": {
+                          "fields": {
+                            "time": {
+                              "timestampValue": "2021-05-24T07:45:21.869Z"
+                            },
+                            "auth": {
+                              "mapValue": {
+                                "fields": {
+                                  "uid": {
+                                    "stringValue": "john"
+                                  },
+                                  "token": {
+                                    "mapValue": {
+                                      "fields": {
+                                        "iss": {
+                                          "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                                        },
+                                        "aud": {
+                                          "stringValue": "firestore-emulator-example"
+                                        },
+                                        "iat": {
+                                          "intValue": "0"
+                                        },
+                                        "exp": {
+                                          "intValue": "3600"
+                                        },
+                                        "auth_time": {
+                                          "intValue": "0"
+                                        },
+                                        "sub": {
+                                          "stringValue": "john"
+                                        },
+                                        "user_id": {
+                                          "stringValue": "john"
+                                        },
+                                        "firebase": {
+                                          "mapValue": {
+                                            "fields": {
+                                              "sign_in_provider": {
+                                                "stringValue": "custom"
+                                              },
+                                              "identities": {
+                                                "mapValue": {
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "headers": {
+                              "mapValue": {
+                              }
+                            },
+                            "inTransaction": {
+                              "boolValue": true
+                            },
+                            "path": {
+                              "pathValue": {
+                                "segments": [{
+                                  "simple": "databases"
+                                }, {
+                                  "simple": "(default)"
+                                }, {
+                                  "simple": "documents"
+                                }, {
+                                  "simple": "pax"
+                                }, {
+                                  "simple": "alice"
+                                }]
+                              }
+                            },
+                            "transforms": {
+                              "nullValue": null
+                            },
+                            "writeFields": {
+                              "nullValue": null
+                            },
+                            "readFields": {
+                              "nullValue": null
+                            },
+                            "resource": {
+                              "mapValue": {
+                                "fields": {
+                                  "data": {
+                                    "mapValue": {
+                                      "fields": {
+                                        "is_supervisor": {
+                                          "boolValue": true
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "__name__": {
+                                    "pathValue": {
+                                      "segments": [{
+                                        "simple": "databases"
+                                      }, {
+                                        "simple": "(default)"
+                                      }, {
+                                        "simple": "documents"
+                                      }, {
+                                        "simple": "pax"
+                                      }, {
+                                        "simple": "alice"
+                                      }]
+                                    }
+                                  },
+                                  "id": {
+                                    "stringValue": "alice"
+                                  }
+                                }
+                              }
+                            },
+                            "method": {
+                              "stringValue": "create"
+                            }
+                          }
+                        }
+                      },
+                      "count": 1
+                    }, {
+                      "value": {
+                        "mapValue": {
+                          "fields": {
+                            "time": {
+                              "timestampValue": "2021-05-24T07:45:22.088Z"
+                            },
+                            "auth": {
+                              "mapValue": {
+                                "fields": {
+                                  "uid": {
+                                    "stringValue": "alice"
+                                  },
+                                  "token": {
+                                    "mapValue": {
+                                      "fields": {
+                                        "iss": {
+                                          "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                                        },
+                                        "aud": {
+                                          "stringValue": "firestore-emulator-example"
+                                        },
+                                        "iat": {
+                                          "intValue": "0"
+                                        },
+                                        "exp": {
+                                          "intValue": "3600"
+                                        },
+                                        "auth_time": {
+                                          "intValue": "0"
+                                        },
+                                        "sub": {
+                                          "stringValue": "alice"
+                                        },
+                                        "user_id": {
+                                          "stringValue": "alice"
+                                        },
+                                        "firebase": {
+                                          "mapValue": {
+                                            "fields": {
+                                              "sign_in_provider": {
+                                                "stringValue": "custom"
+                                              },
+                                              "identities": {
+                                                "mapValue": {
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "headers": {
+                              "mapValue": {
+                              }
+                            },
+                            "inTransaction": {
+                              "boolValue": true
+                            },
+                            "path": {
+                              "pathValue": {
+                                "segments": [{
+                                  "simple": "databases"
+                                }, {
+                                  "simple": "(default)"
+                                }, {
+                                  "simple": "documents"
+                                }, {
+                                  "simple": "pax"
+                                }, {
+                                  "simple": "bob"
+                                }]
+                              }
+                            },
+                            "transforms": {
+                              "nullValue": null
+                            },
+                            "writeFields": {
+                              "nullValue": null
+                            },
+                            "readFields": {
+                              "nullValue": null
+                            },
+                            "resource": {
+                              "mapValue": {
+                                "fields": {
+                                  "data": {
+                                    "mapValue": {
+                                      "fields": {
+                                        "name": {
+                                          "stringValue": "Bob"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "__name__": {
+                                    "pathValue": {
+                                      "segments": [{
+                                        "simple": "databases"
+                                      }, {
+                                        "simple": "(default)"
+                                      }, {
+                                        "simple": "documents"
+                                      }, {
+                                        "simple": "pax"
+                                      }, {
+                                        "simple": "bob"
+                                      }]
+                                    }
+                                  },
+                                  "id": {
+                                    "stringValue": "bob"
+                                  }
+                                }
+                              }
+                            },
+                            "method": {
+                              "stringValue": "create"
+                            }
+                          }
+                        }
+                      },
+                      "count": 1
+                    }, {
+                      "value": {
+                        "mapValue": {
+                          "fields": {
+                            "time": {
+                              "timestampValue": "2021-05-24T07:45:22.154Z"
+                            },
+                            "auth": {
+                              "mapValue": {
+                                "fields": {
+                                  "uid": {
+                                    "stringValue": "alice"
+                                  },
+                                  "token": {
+                                    "mapValue": {
+                                      "fields": {
+                                        "iss": {
+                                          "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                                        },
+                                        "aud": {
+                                          "stringValue": "firestore-emulator-example"
+                                        },
+                                        "iat": {
+                                          "intValue": "0"
+                                        },
+                                        "exp": {
+                                          "intValue": "3600"
+                                        },
+                                        "auth_time": {
+                                          "intValue": "0"
+                                        },
+                                        "sub": {
+                                          "stringValue": "alice"
+                                        },
+                                        "user_id": {
+                                          "stringValue": "alice"
+                                        },
+                                        "firebase": {
+                                          "mapValue": {
+                                            "fields": {
+                                              "sign_in_provider": {
+                                                "stringValue": "custom"
+                                              },
+                                              "identities": {
+                                                "mapValue": {
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "headers": {
+                              "mapValue": {
+                              }
+                            },
+                            "inTransaction": {
+                              "boolValue": false
+                            },
+                            "path": {
+                              "pathValue": {
+                                "segments": [{
+                                  "simple": "databases"
+                                }, {
+                                  "simple": "(default)"
+                                }, {
+                                  "simple": "documents"
+                                }, {
+                                  "simple": "pax"
+                                }, {
+                                  "simple": "bob"
+                                }]
+                              }
+                            },
+                            "fields": {
+                              "nullValue": null
+                            },
+                            "method": {
+                              "stringValue": "get"
+                            }
+                          }
+                        }
+                      },
+                      "count": 1
+                    }]
+                  }]
+                }]
+              }]
+            }]
+          }]
+        }]
+      }]
+    }]
+  }, {
+    "sourcePosition": {
+      "line": 11,
+      "column": 14,
+      "currentOffset": 284,
+      "endOffset": 307
+    },
+    "values": [{
+      "value": {
+        "undefined": {
+          "sourcePosition": {
+            "line": 11,
+            "column": 14,
+            "currentOffset": 284,
+            "endOffset": 290
+          },
+          "causeMessage": "Null value error."
+        }
+      },
+      "count": 1
+    }, {
+      "value": {
+        "boolValue": true
+      },
+      "count": 6
+    }],
+    "children": [{
+      "sourcePosition": {
+        "line": 11,
+        "column": 14,
+        "currentOffset": 284,
+        "endOffset": 299
+      },
+      "values": [{
+        "value": {
+          "undefined": {
+            "sourcePosition": {
+              "line": 11,
+              "column": 14,
+              "currentOffset": 284,
+              "endOffset": 290
+            },
+            "causeMessage": "Null value error."
+          }
+        },
+        "count": 1
+      }, {
+        "value": {
+          "stringValue": "alice"
+        },
+        "count": 5
+      }, {
+        "value": {
+          "stringValue": "john"
+        },
+        "count": 1
+      }],
+      "children": [{
+        "sourcePosition": {
+          "line": 11,
+          "column": 14,
+          "currentOffset": 284,
+          "endOffset": 295
+        },
+        "values": [{
+          "value": {
+            "nullValue": null
+          },
+          "count": 1
+        }, {
+          "value": {
+            "mapValue": {
+              "fields": {
+                "uid": {
+                  "stringValue": "alice"
+                },
+                "token": {
+                  "mapValue": {
+                    "fields": {
+                      "iss": {
+                        "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                      },
+                      "aud": {
+                        "stringValue": "firestore-emulator-example"
+                      },
+                      "iat": {
+                        "intValue": "0"
+                      },
+                      "exp": {
+                        "intValue": "3600"
+                      },
+                      "auth_time": {
+                        "intValue": "0"
+                      },
+                      "sub": {
+                        "stringValue": "alice"
+                      },
+                      "user_id": {
+                        "stringValue": "alice"
+                      },
+                      "firebase": {
+                        "mapValue": {
+                          "fields": {
+                            "sign_in_provider": {
+                              "stringValue": "custom"
+                            },
+                            "identities": {
+                              "mapValue": {
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "count": 5
+        }, {
+          "value": {
+            "mapValue": {
+              "fields": {
+                "uid": {
+                  "stringValue": "john"
+                },
+                "token": {
+                  "mapValue": {
+                    "fields": {
+                      "iss": {
+                        "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                      },
+                      "aud": {
+                        "stringValue": "firestore-emulator-example"
+                      },
+                      "iat": {
+                        "intValue": "0"
+                      },
+                      "exp": {
+                        "intValue": "3600"
+                      },
+                      "auth_time": {
+                        "intValue": "0"
+                      },
+                      "sub": {
+                        "stringValue": "john"
+                      },
+                      "user_id": {
+                        "stringValue": "john"
+                      },
+                      "firebase": {
+                        "mapValue": {
+                          "fields": {
+                            "sign_in_provider": {
+                              "stringValue": "custom"
+                            },
+                            "identities": {
+                              "mapValue": {
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "count": 1
+        }],
+        "children": [{
+          "sourcePosition": {
+            "line": 11,
+            "column": 14,
+            "currentOffset": 284,
+            "endOffset": 290
+          },
+          "values": [{
+            "value": {
+              "mapValue": {
+                "fields": {
+                  "time": {
+                    "timestampValue": "2021-05-24T07:45:21.116Z"
+                  },
+                  "auth": {
+                    "nullValue": null
+                  },
+                  "headers": {
+                    "mapValue": {
+                    }
+                  },
+                  "inTransaction": {
+                    "boolValue": true
+                  },
+                  "path": {
+                    "pathValue": {
+                      "segments": [{
+                        "simple": "databases"
+                      }, {
+                        "simple": "(default)"
+                      }, {
+                        "simple": "documents"
+                      }, {
+                        "simple": "pax"
+                      }, {
+                        "simple": "alice"
+                      }]
+                    }
+                  },
+                  "transforms": {
+                    "nullValue": null
+                  },
+                  "writeFields": {
+                    "nullValue": null
+                  },
+                  "readFields": {
+                    "nullValue": null
+                  },
+                  "resource": {
+                    "mapValue": {
+                      "fields": {
+                        "data": {
+                          "mapValue": {
+                            "fields": {
+                              "name": {
+                                "stringValue": "Alice"
+                              }
+                            }
+                          }
+                        },
+                        "__name__": {
+                          "pathValue": {
+                            "segments": [{
+                              "simple": "databases"
+                            }, {
+                              "simple": "(default)"
+                            }, {
+                              "simple": "documents"
+                            }, {
+                              "simple": "pax"
+                            }, {
+                              "simple": "alice"
+                            }]
+                          }
+                        },
+                        "id": {
+                          "stringValue": "alice"
+                        }
+                      }
+                    }
+                  },
+                  "method": {
+                    "stringValue": "create"
+                  }
+                }
+              }
+            },
+            "count": 1
+          }, {
+            "value": {
+              "mapValue": {
+                "fields": {
+                  "time": {
+                    "timestampValue": "2021-05-24T07:45:21.798Z"
+                  },
+                  "auth": {
+                    "mapValue": {
+                      "fields": {
+                        "uid": {
+                          "stringValue": "alice"
+                        },
+                        "token": {
+                          "mapValue": {
+                            "fields": {
+                              "iss": {
+                                "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                              },
+                              "aud": {
+                                "stringValue": "firestore-emulator-example"
+                              },
+                              "iat": {
+                                "intValue": "0"
+                              },
+                              "exp": {
+                                "intValue": "3600"
+                              },
+                              "auth_time": {
+                                "intValue": "0"
+                              },
+                              "sub": {
+                                "stringValue": "alice"
+                              },
+                              "user_id": {
+                                "stringValue": "alice"
+                              },
+                              "firebase": {
+                                "mapValue": {
+                                  "fields": {
+                                    "sign_in_provider": {
+                                      "stringValue": "custom"
+                                    },
+                                    "identities": {
+                                      "mapValue": {
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "headers": {
+                    "mapValue": {
+                    }
+                  },
+                  "inTransaction": {
+                    "boolValue": true
+                  },
+                  "path": {
+                    "pathValue": {
+                      "segments": [{
+                        "simple": "databases"
+                      }, {
+                        "simple": "(default)"
+                      }, {
+                        "simple": "documents"
+                      }, {
+                        "simple": "pax"
+                      }, {
+                        "simple": "alice"
+                      }]
+                    }
+                  },
+                  "transforms": {
+                    "nullValue": null
+                  },
+                  "writeFields": {
+                    "nullValue": null
+                  },
+                  "readFields": {
+                    "nullValue": null
+                  },
+                  "resource": {
+                    "mapValue": {
+                      "fields": {
+                        "data": {
+                          "mapValue": {
+                            "fields": {
+                              "is_supervisor": {
+                                "boolValue": true
+                              }
+                            }
+                          }
+                        },
+                        "__name__": {
+                          "pathValue": {
+                            "segments": [{
+                              "simple": "databases"
+                            }, {
+                              "simple": "(default)"
+                            }, {
+                              "simple": "documents"
+                            }, {
+                              "simple": "pax"
+                            }, {
+                              "simple": "alice"
+                            }]
+                          }
+                        },
+                        "id": {
+                          "stringValue": "alice"
+                        }
+                      }
+                    }
+                  },
+                  "method": {
+                    "stringValue": "create"
+                  }
+                }
+              }
+            },
+            "count": 1
+          }, {
+            "value": {
+              "mapValue": {
+                "fields": {
+                  "time": {
+                    "timestampValue": "2021-05-24T07:45:21.869Z"
+                  },
+                  "auth": {
+                    "mapValue": {
+                      "fields": {
+                        "uid": {
+                          "stringValue": "john"
+                        },
+                        "token": {
+                          "mapValue": {
+                            "fields": {
+                              "iss": {
+                                "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                              },
+                              "aud": {
+                                "stringValue": "firestore-emulator-example"
+                              },
+                              "iat": {
+                                "intValue": "0"
+                              },
+                              "exp": {
+                                "intValue": "3600"
+                              },
+                              "auth_time": {
+                                "intValue": "0"
+                              },
+                              "sub": {
+                                "stringValue": "john"
+                              },
+                              "user_id": {
+                                "stringValue": "john"
+                              },
+                              "firebase": {
+                                "mapValue": {
+                                  "fields": {
+                                    "sign_in_provider": {
+                                      "stringValue": "custom"
+                                    },
+                                    "identities": {
+                                      "mapValue": {
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "headers": {
+                    "mapValue": {
+                    }
+                  },
+                  "inTransaction": {
+                    "boolValue": true
+                  },
+                  "path": {
+                    "pathValue": {
+                      "segments": [{
+                        "simple": "databases"
+                      }, {
+                        "simple": "(default)"
+                      }, {
+                        "simple": "documents"
+                      }, {
+                        "simple": "pax"
+                      }, {
+                        "simple": "alice"
+                      }]
+                    }
+                  },
+                  "transforms": {
+                    "nullValue": null
+                  },
+                  "writeFields": {
+                    "nullValue": null
+                  },
+                  "readFields": {
+                    "nullValue": null
+                  },
+                  "resource": {
+                    "mapValue": {
+                      "fields": {
+                        "data": {
+                          "mapValue": {
+                            "fields": {
+                              "is_supervisor": {
+                                "boolValue": true
+                              }
+                            }
+                          }
+                        },
+                        "__name__": {
+                          "pathValue": {
+                            "segments": [{
+                              "simple": "databases"
+                            }, {
+                              "simple": "(default)"
+                            }, {
+                              "simple": "documents"
+                            }, {
+                              "simple": "pax"
+                            }, {
+                              "simple": "alice"
+                            }]
+                          }
+                        },
+                        "id": {
+                          "stringValue": "alice"
+                        }
+                      }
+                    }
+                  },
+                  "method": {
+                    "stringValue": "create"
+                  }
+                }
+              }
+            },
+            "count": 1
+          }, {
+            "value": {
+              "mapValue": {
+                "fields": {
+                  "time": {
+                    "timestampValue": "2021-05-24T07:45:22.001Z"
+                  },
+                  "auth": {
+                    "mapValue": {
+                      "fields": {
+                        "uid": {
+                          "stringValue": "alice"
+                        },
+                        "token": {
+                          "mapValue": {
+                            "fields": {
+                              "iss": {
+                                "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                              },
+                              "aud": {
+                                "stringValue": "firestore-emulator-example"
+                              },
+                              "iat": {
+                                "intValue": "0"
+                              },
+                              "exp": {
+                                "intValue": "3600"
+                              },
+                              "auth_time": {
+                                "intValue": "0"
+                              },
+                              "sub": {
+                                "stringValue": "alice"
+                              },
+                              "user_id": {
+                                "stringValue": "alice"
+                              },
+                              "firebase": {
+                                "mapValue": {
+                                  "fields": {
+                                    "sign_in_provider": {
+                                      "stringValue": "custom"
+                                    },
+                                    "identities": {
+                                      "mapValue": {
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "headers": {
+                    "mapValue": {
+                    }
+                  },
+                  "inTransaction": {
+                    "boolValue": true
+                  },
+                  "path": {
+                    "pathValue": {
+                      "segments": [{
+                        "simple": "databases"
+                      }, {
+                        "simple": "(default)"
+                      }, {
+                        "simple": "documents"
+                      }, {
+                        "simple": "pax"
+                      }, {
+                        "simple": "alice"
+                      }]
+                    }
+                  },
+                  "transforms": {
+                    "nullValue": null
+                  },
+                  "writeFields": {
+                    "listValue": {
+                      "values": [{
+                        "stringValue": "name"
+                      }]
+                    }
+                  },
+                  "readFields": {
+                    "nullValue": null
+                  },
+                  "resource": {
+                    "mapValue": {
+                      "fields": {
+                        "data": {
+                          "mapValue": {
+                            "fields": {
+                              "name": {
+                                "stringValue": "Alice 2"
+                              }
+                            }
+                          }
+                        },
+                        "__name__": {
+                          "pathValue": {
+                            "segments": [{
+                              "simple": "databases"
+                            }, {
+                              "simple": "(default)"
+                            }, {
+                              "simple": "documents"
+                            }, {
+                              "simple": "pax"
+                            }, {
+                              "simple": "alice"
+                            }]
+                          }
+                        },
+                        "id": {
+                          "stringValue": "alice"
+                        }
+                      }
+                    }
+                  },
+                  "method": {
+                    "stringValue": "update"
+                  }
+                }
+              }
+            },
+            "count": 1
+          }, {
+            "value": {
+              "mapValue": {
+                "fields": {
+                  "time": {
+                    "timestampValue": "2021-05-24T07:45:22.088Z"
+                  },
+                  "auth": {
+                    "mapValue": {
+                      "fields": {
+                        "uid": {
+                          "stringValue": "alice"
+                        },
+                        "token": {
+                          "mapValue": {
+                            "fields": {
+                              "iss": {
+                                "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                              },
+                              "aud": {
+                                "stringValue": "firestore-emulator-example"
+                              },
+                              "iat": {
+                                "intValue": "0"
+                              },
+                              "exp": {
+                                "intValue": "3600"
+                              },
+                              "auth_time": {
+                                "intValue": "0"
+                              },
+                              "sub": {
+                                "stringValue": "alice"
+                              },
+                              "user_id": {
+                                "stringValue": "alice"
+                              },
+                              "firebase": {
+                                "mapValue": {
+                                  "fields": {
+                                    "sign_in_provider": {
+                                      "stringValue": "custom"
+                                    },
+                                    "identities": {
+                                      "mapValue": {
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "headers": {
+                    "mapValue": {
+                    }
+                  },
+                  "inTransaction": {
+                    "boolValue": true
+                  },
+                  "path": {
+                    "pathValue": {
+                      "segments": [{
+                        "simple": "databases"
+                      }, {
+                        "simple": "(default)"
+                      }, {
+                        "simple": "documents"
+                      }, {
+                        "simple": "pax"
+                      }, {
+                        "simple": "bob"
+                      }]
+                    }
+                  },
+                  "transforms": {
+                    "nullValue": null
+                  },
+                  "writeFields": {
+                    "nullValue": null
+                  },
+                  "readFields": {
+                    "nullValue": null
+                  },
+                  "resource": {
+                    "mapValue": {
+                      "fields": {
+                        "data": {
+                          "mapValue": {
+                            "fields": {
+                              "name": {
+                                "stringValue": "Bob"
+                              }
+                            }
+                          }
+                        },
+                        "__name__": {
+                          "pathValue": {
+                            "segments": [{
+                              "simple": "databases"
+                            }, {
+                              "simple": "(default)"
+                            }, {
+                              "simple": "documents"
+                            }, {
+                              "simple": "pax"
+                            }, {
+                              "simple": "bob"
+                            }]
+                          }
+                        },
+                        "id": {
+                          "stringValue": "bob"
+                        }
+                      }
+                    }
+                  },
+                  "method": {
+                    "stringValue": "create"
+                  }
+                }
+              }
+            },
+            "count": 1
+          }, {
+            "value": {
+              "mapValue": {
+                "fields": {
+                  "time": {
+                    "timestampValue": "2021-05-24T07:45:22.154Z"
+                  },
+                  "auth": {
+                    "mapValue": {
+                      "fields": {
+                        "uid": {
+                          "stringValue": "alice"
+                        },
+                        "token": {
+                          "mapValue": {
+                            "fields": {
+                              "iss": {
+                                "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                              },
+                              "aud": {
+                                "stringValue": "firestore-emulator-example"
+                              },
+                              "iat": {
+                                "intValue": "0"
+                              },
+                              "exp": {
+                                "intValue": "3600"
+                              },
+                              "auth_time": {
+                                "intValue": "0"
+                              },
+                              "sub": {
+                                "stringValue": "alice"
+                              },
+                              "user_id": {
+                                "stringValue": "alice"
+                              },
+                              "firebase": {
+                                "mapValue": {
+                                  "fields": {
+                                    "sign_in_provider": {
+                                      "stringValue": "custom"
+                                    },
+                                    "identities": {
+                                      "mapValue": {
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "headers": {
+                    "mapValue": {
+                    }
+                  },
+                  "inTransaction": {
+                    "boolValue": false
+                  },
+                  "path": {
+                    "pathValue": {
+                      "segments": [{
+                        "simple": "databases"
+                      }, {
+                        "simple": "(default)"
+                      }, {
+                        "simple": "documents"
+                      }, {
+                        "simple": "pax"
+                      }, {
+                        "simple": "alice"
+                      }]
+                    }
+                  },
+                  "fields": {
+                    "nullValue": null
+                  },
+                  "method": {
+                    "stringValue": "get"
+                  }
+                }
+              }
+            },
+            "count": 1
+          }, {
+            "value": {
+              "mapValue": {
+                "fields": {
+                  "time": {
+                    "timestampValue": "2021-05-24T07:45:22.154Z"
+                  },
+                  "auth": {
+                    "mapValue": {
+                      "fields": {
+                        "uid": {
+                          "stringValue": "alice"
+                        },
+                        "token": {
+                          "mapValue": {
+                            "fields": {
+                              "iss": {
+                                "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                              },
+                              "aud": {
+                                "stringValue": "firestore-emulator-example"
+                              },
+                              "iat": {
+                                "intValue": "0"
+                              },
+                              "exp": {
+                                "intValue": "3600"
+                              },
+                              "auth_time": {
+                                "intValue": "0"
+                              },
+                              "sub": {
+                                "stringValue": "alice"
+                              },
+                              "user_id": {
+                                "stringValue": "alice"
+                              },
+                              "firebase": {
+                                "mapValue": {
+                                  "fields": {
+                                    "sign_in_provider": {
+                                      "stringValue": "custom"
+                                    },
+                                    "identities": {
+                                      "mapValue": {
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "headers": {
+                    "mapValue": {
+                    }
+                  },
+                  "inTransaction": {
+                    "boolValue": false
+                  },
+                  "path": {
+                    "pathValue": {
+                      "segments": [{
+                        "simple": "databases"
+                      }, {
+                        "simple": "(default)"
+                      }, {
+                        "simple": "documents"
+                      }, {
+                        "simple": "pax"
+                      }, {
+                        "simple": "bob"
+                      }]
+                    }
+                  },
+                  "fields": {
+                    "nullValue": null
+                  },
+                  "method": {
+                    "stringValue": "get"
+                  }
+                }
+              }
+            },
+            "count": 1
+          }]
+        }]
+      }]
+    }]
+  }, {
+    "sourcePosition": {
+      "line": 15,
+      "column": 14,
+      "currentOffset": 365,
+      "endOffset": 395
+    },
+    "values": [{
+      "value": {
+        "undefined": {
+          "sourcePosition": {
+            "line": 15,
+            "column": 23,
+            "currentOffset": 374,
+            "endOffset": 380
+          },
+          "causeMessage": "Null value error."
+        }
+      },
+      "count": 1
+    }, {
+      "value": {
+        "boolValue": true
+      },
+      "count": 3
+    }, {
+      "value": {
+        "boolValue": false
+      },
+      "count": 3
+    }],
+    "children": [{
+      "sourcePosition": {
+        "line": 15,
+        "column": 14,
+        "currentOffset": 365,
+        "endOffset": 369
+      },
+      "values": [{
+        "value": {
+          "stringValue": "alice"
+        },
+        "count": 5
+      }, {
+        "value": {
+          "stringValue": "bob"
+        },
+        "count": 2
+      }]
+    }, {
+      "sourcePosition": {
+        "line": 15,
+        "column": 23,
+        "currentOffset": 374,
+        "endOffset": 395
+      },
+      "values": [{
+        "value": {
+          "undefined": {
+            "sourcePosition": {
+              "line": 15,
+              "column": 23,
+              "currentOffset": 374,
+              "endOffset": 380
+            },
+            "causeMessage": "Null value error."
+          }
+        },
+        "count": 1
+      }, {
+        "value": {
+          "stringValue": "alice"
+        },
+        "count": 5
+      }, {
+        "value": {
+          "stringValue": "john"
+        },
+        "count": 1
+      }],
+      "children": [{
+        "sourcePosition": {
+          "line": 15,
+          "column": 23,
+          "currentOffset": 374,
+          "endOffset": 391
+        },
+        "values": [{
+          "value": {
+            "undefined": {
+              "sourcePosition": {
+                "line": 15,
+                "column": 23,
+                "currentOffset": 374,
+                "endOffset": 380
+              },
+              "causeMessage": "Null value error."
+            }
+          },
+          "count": 1
+        }, {
+          "value": {
+            "mapValue": {
+              "fields": {
+                "iss": {
+                  "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                },
+                "aud": {
+                  "stringValue": "firestore-emulator-example"
+                },
+                "iat": {
+                  "intValue": "0"
+                },
+                "exp": {
+                  "intValue": "3600"
+                },
+                "auth_time": {
+                  "intValue": "0"
+                },
+                "sub": {
+                  "stringValue": "alice"
+                },
+                "user_id": {
+                  "stringValue": "alice"
+                },
+                "firebase": {
+                  "mapValue": {
+                    "fields": {
+                      "sign_in_provider": {
+                        "stringValue": "custom"
+                      },
+                      "identities": {
+                        "mapValue": {
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "count": 5
+        }, {
+          "value": {
+            "mapValue": {
+              "fields": {
+                "iss": {
+                  "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                },
+                "aud": {
+                  "stringValue": "firestore-emulator-example"
+                },
+                "iat": {
+                  "intValue": "0"
+                },
+                "exp": {
+                  "intValue": "3600"
+                },
+                "auth_time": {
+                  "intValue": "0"
+                },
+                "sub": {
+                  "stringValue": "john"
+                },
+                "user_id": {
+                  "stringValue": "john"
+                },
+                "firebase": {
+                  "mapValue": {
+                    "fields": {
+                      "sign_in_provider": {
+                        "stringValue": "custom"
+                      },
+                      "identities": {
+                        "mapValue": {
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "count": 1
+        }],
+        "children": [{
+          "sourcePosition": {
+            "line": 15,
+            "column": 23,
+            "currentOffset": 374,
+            "endOffset": 385
+          },
+          "values": [{
+            "value": {
+              "nullValue": null
+            },
+            "count": 1
+          }, {
+            "value": {
+              "mapValue": {
+                "fields": {
+                  "uid": {
+                    "stringValue": "alice"
+                  },
+                  "token": {
+                    "mapValue": {
+                      "fields": {
+                        "iss": {
+                          "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                        },
+                        "aud": {
+                          "stringValue": "firestore-emulator-example"
+                        },
+                        "iat": {
+                          "intValue": "0"
+                        },
+                        "exp": {
+                          "intValue": "3600"
+                        },
+                        "auth_time": {
+                          "intValue": "0"
+                        },
+                        "sub": {
+                          "stringValue": "alice"
+                        },
+                        "user_id": {
+                          "stringValue": "alice"
+                        },
+                        "firebase": {
+                          "mapValue": {
+                            "fields": {
+                              "sign_in_provider": {
+                                "stringValue": "custom"
+                              },
+                              "identities": {
+                                "mapValue": {
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "count": 5
+          }, {
+            "value": {
+              "mapValue": {
+                "fields": {
+                  "uid": {
+                    "stringValue": "john"
+                  },
+                  "token": {
+                    "mapValue": {
+                      "fields": {
+                        "iss": {
+                          "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                        },
+                        "aud": {
+                          "stringValue": "firestore-emulator-example"
+                        },
+                        "iat": {
+                          "intValue": "0"
+                        },
+                        "exp": {
+                          "intValue": "3600"
+                        },
+                        "auth_time": {
+                          "intValue": "0"
+                        },
+                        "sub": {
+                          "stringValue": "john"
+                        },
+                        "user_id": {
+                          "stringValue": "john"
+                        },
+                        "firebase": {
+                          "mapValue": {
+                            "fields": {
+                              "sign_in_provider": {
+                                "stringValue": "custom"
+                              },
+                              "identities": {
+                                "mapValue": {
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "count": 1
+          }],
+          "children": [{
+            "sourcePosition": {
+              "line": 15,
+              "column": 23,
+              "currentOffset": 374,
+              "endOffset": 380
+            },
+            "values": [{
+              "value": {
+                "mapValue": {
+                  "fields": {
+                    "time": {
+                      "timestampValue": "2021-05-24T07:45:21.116Z"
+                    },
+                    "auth": {
+                      "nullValue": null
+                    },
+                    "headers": {
+                      "mapValue": {
+                      }
+                    },
+                    "inTransaction": {
+                      "boolValue": true
+                    },
+                    "path": {
+                      "pathValue": {
+                        "segments": [{
+                          "simple": "databases"
+                        }, {
+                          "simple": "(default)"
+                        }, {
+                          "simple": "documents"
+                        }, {
+                          "simple": "pax"
+                        }, {
+                          "simple": "alice"
+                        }]
+                      }
+                    },
+                    "transforms": {
+                      "nullValue": null
+                    },
+                    "writeFields": {
+                      "nullValue": null
+                    },
+                    "readFields": {
+                      "nullValue": null
+                    },
+                    "resource": {
+                      "mapValue": {
+                        "fields": {
+                          "data": {
+                            "mapValue": {
+                              "fields": {
+                                "name": {
+                                  "stringValue": "Alice"
+                                }
+                              }
+                            }
+                          },
+                          "__name__": {
+                            "pathValue": {
+                              "segments": [{
+                                "simple": "databases"
+                              }, {
+                                "simple": "(default)"
+                              }, {
+                                "simple": "documents"
+                              }, {
+                                "simple": "pax"
+                              }, {
+                                "simple": "alice"
+                              }]
+                            }
+                          },
+                          "id": {
+                            "stringValue": "alice"
+                          }
+                        }
+                      }
+                    },
+                    "method": {
+                      "stringValue": "create"
+                    }
+                  }
+                }
+              },
+              "count": 1
+            }, {
+              "value": {
+                "mapValue": {
+                  "fields": {
+                    "time": {
+                      "timestampValue": "2021-05-24T07:45:21.798Z"
+                    },
+                    "auth": {
+                      "mapValue": {
+                        "fields": {
+                          "uid": {
+                            "stringValue": "alice"
+                          },
+                          "token": {
+                            "mapValue": {
+                              "fields": {
+                                "iss": {
+                                  "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                                },
+                                "aud": {
+                                  "stringValue": "firestore-emulator-example"
+                                },
+                                "iat": {
+                                  "intValue": "0"
+                                },
+                                "exp": {
+                                  "intValue": "3600"
+                                },
+                                "auth_time": {
+                                  "intValue": "0"
+                                },
+                                "sub": {
+                                  "stringValue": "alice"
+                                },
+                                "user_id": {
+                                  "stringValue": "alice"
+                                },
+                                "firebase": {
+                                  "mapValue": {
+                                    "fields": {
+                                      "sign_in_provider": {
+                                        "stringValue": "custom"
+                                      },
+                                      "identities": {
+                                        "mapValue": {
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "headers": {
+                      "mapValue": {
+                      }
+                    },
+                    "inTransaction": {
+                      "boolValue": true
+                    },
+                    "path": {
+                      "pathValue": {
+                        "segments": [{
+                          "simple": "databases"
+                        }, {
+                          "simple": "(default)"
+                        }, {
+                          "simple": "documents"
+                        }, {
+                          "simple": "pax"
+                        }, {
+                          "simple": "alice"
+                        }]
+                      }
+                    },
+                    "transforms": {
+                      "nullValue": null
+                    },
+                    "writeFields": {
+                      "nullValue": null
+                    },
+                    "readFields": {
+                      "nullValue": null
+                    },
+                    "resource": {
+                      "mapValue": {
+                        "fields": {
+                          "data": {
+                            "mapValue": {
+                              "fields": {
+                                "is_supervisor": {
+                                  "boolValue": true
+                                }
+                              }
+                            }
+                          },
+                          "__name__": {
+                            "pathValue": {
+                              "segments": [{
+                                "simple": "databases"
+                              }, {
+                                "simple": "(default)"
+                              }, {
+                                "simple": "documents"
+                              }, {
+                                "simple": "pax"
+                              }, {
+                                "simple": "alice"
+                              }]
+                            }
+                          },
+                          "id": {
+                            "stringValue": "alice"
+                          }
+                        }
+                      }
+                    },
+                    "method": {
+                      "stringValue": "create"
+                    }
+                  }
+                }
+              },
+              "count": 1
+            }, {
+              "value": {
+                "mapValue": {
+                  "fields": {
+                    "time": {
+                      "timestampValue": "2021-05-24T07:45:21.869Z"
+                    },
+                    "auth": {
+                      "mapValue": {
+                        "fields": {
+                          "uid": {
+                            "stringValue": "john"
+                          },
+                          "token": {
+                            "mapValue": {
+                              "fields": {
+                                "iss": {
+                                  "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                                },
+                                "aud": {
+                                  "stringValue": "firestore-emulator-example"
+                                },
+                                "iat": {
+                                  "intValue": "0"
+                                },
+                                "exp": {
+                                  "intValue": "3600"
+                                },
+                                "auth_time": {
+                                  "intValue": "0"
+                                },
+                                "sub": {
+                                  "stringValue": "john"
+                                },
+                                "user_id": {
+                                  "stringValue": "john"
+                                },
+                                "firebase": {
+                                  "mapValue": {
+                                    "fields": {
+                                      "sign_in_provider": {
+                                        "stringValue": "custom"
+                                      },
+                                      "identities": {
+                                        "mapValue": {
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "headers": {
+                      "mapValue": {
+                      }
+                    },
+                    "inTransaction": {
+                      "boolValue": true
+                    },
+                    "path": {
+                      "pathValue": {
+                        "segments": [{
+                          "simple": "databases"
+                        }, {
+                          "simple": "(default)"
+                        }, {
+                          "simple": "documents"
+                        }, {
+                          "simple": "pax"
+                        }, {
+                          "simple": "alice"
+                        }]
+                      }
+                    },
+                    "transforms": {
+                      "nullValue": null
+                    },
+                    "writeFields": {
+                      "nullValue": null
+                    },
+                    "readFields": {
+                      "nullValue": null
+                    },
+                    "resource": {
+                      "mapValue": {
+                        "fields": {
+                          "data": {
+                            "mapValue": {
+                              "fields": {
+                                "is_supervisor": {
+                                  "boolValue": true
+                                }
+                              }
+                            }
+                          },
+                          "__name__": {
+                            "pathValue": {
+                              "segments": [{
+                                "simple": "databases"
+                              }, {
+                                "simple": "(default)"
+                              }, {
+                                "simple": "documents"
+                              }, {
+                                "simple": "pax"
+                              }, {
+                                "simple": "alice"
+                              }]
+                            }
+                          },
+                          "id": {
+                            "stringValue": "alice"
+                          }
+                        }
+                      }
+                    },
+                    "method": {
+                      "stringValue": "create"
+                    }
+                  }
+                }
+              },
+              "count": 1
+            }, {
+              "value": {
+                "mapValue": {
+                  "fields": {
+                    "time": {
+                      "timestampValue": "2021-05-24T07:45:22.001Z"
+                    },
+                    "auth": {
+                      "mapValue": {
+                        "fields": {
+                          "uid": {
+                            "stringValue": "alice"
+                          },
+                          "token": {
+                            "mapValue": {
+                              "fields": {
+                                "iss": {
+                                  "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                                },
+                                "aud": {
+                                  "stringValue": "firestore-emulator-example"
+                                },
+                                "iat": {
+                                  "intValue": "0"
+                                },
+                                "exp": {
+                                  "intValue": "3600"
+                                },
+                                "auth_time": {
+                                  "intValue": "0"
+                                },
+                                "sub": {
+                                  "stringValue": "alice"
+                                },
+                                "user_id": {
+                                  "stringValue": "alice"
+                                },
+                                "firebase": {
+                                  "mapValue": {
+                                    "fields": {
+                                      "sign_in_provider": {
+                                        "stringValue": "custom"
+                                      },
+                                      "identities": {
+                                        "mapValue": {
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "headers": {
+                      "mapValue": {
+                      }
+                    },
+                    "inTransaction": {
+                      "boolValue": true
+                    },
+                    "path": {
+                      "pathValue": {
+                        "segments": [{
+                          "simple": "databases"
+                        }, {
+                          "simple": "(default)"
+                        }, {
+                          "simple": "documents"
+                        }, {
+                          "simple": "pax"
+                        }, {
+                          "simple": "alice"
+                        }]
+                      }
+                    },
+                    "transforms": {
+                      "nullValue": null
+                    },
+                    "writeFields": {
+                      "listValue": {
+                        "values": [{
+                          "stringValue": "name"
+                        }]
+                      }
+                    },
+                    "readFields": {
+                      "nullValue": null
+                    },
+                    "resource": {
+                      "mapValue": {
+                        "fields": {
+                          "data": {
+                            "mapValue": {
+                              "fields": {
+                                "name": {
+                                  "stringValue": "Alice 2"
+                                }
+                              }
+                            }
+                          },
+                          "__name__": {
+                            "pathValue": {
+                              "segments": [{
+                                "simple": "databases"
+                              }, {
+                                "simple": "(default)"
+                              }, {
+                                "simple": "documents"
+                              }, {
+                                "simple": "pax"
+                              }, {
+                                "simple": "alice"
+                              }]
+                            }
+                          },
+                          "id": {
+                            "stringValue": "alice"
+                          }
+                        }
+                      }
+                    },
+                    "method": {
+                      "stringValue": "update"
+                    }
+                  }
+                }
+              },
+              "count": 1
+            }, {
+              "value": {
+                "mapValue": {
+                  "fields": {
+                    "time": {
+                      "timestampValue": "2021-05-24T07:45:22.088Z"
+                    },
+                    "auth": {
+                      "mapValue": {
+                        "fields": {
+                          "uid": {
+                            "stringValue": "alice"
+                          },
+                          "token": {
+                            "mapValue": {
+                              "fields": {
+                                "iss": {
+                                  "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                                },
+                                "aud": {
+                                  "stringValue": "firestore-emulator-example"
+                                },
+                                "iat": {
+                                  "intValue": "0"
+                                },
+                                "exp": {
+                                  "intValue": "3600"
+                                },
+                                "auth_time": {
+                                  "intValue": "0"
+                                },
+                                "sub": {
+                                  "stringValue": "alice"
+                                },
+                                "user_id": {
+                                  "stringValue": "alice"
+                                },
+                                "firebase": {
+                                  "mapValue": {
+                                    "fields": {
+                                      "sign_in_provider": {
+                                        "stringValue": "custom"
+                                      },
+                                      "identities": {
+                                        "mapValue": {
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "headers": {
+                      "mapValue": {
+                      }
+                    },
+                    "inTransaction": {
+                      "boolValue": true
+                    },
+                    "path": {
+                      "pathValue": {
+                        "segments": [{
+                          "simple": "databases"
+                        }, {
+                          "simple": "(default)"
+                        }, {
+                          "simple": "documents"
+                        }, {
+                          "simple": "pax"
+                        }, {
+                          "simple": "bob"
+                        }]
+                      }
+                    },
+                    "transforms": {
+                      "nullValue": null
+                    },
+                    "writeFields": {
+                      "nullValue": null
+                    },
+                    "readFields": {
+                      "nullValue": null
+                    },
+                    "resource": {
+                      "mapValue": {
+                        "fields": {
+                          "data": {
+                            "mapValue": {
+                              "fields": {
+                                "name": {
+                                  "stringValue": "Bob"
+                                }
+                              }
+                            }
+                          },
+                          "__name__": {
+                            "pathValue": {
+                              "segments": [{
+                                "simple": "databases"
+                              }, {
+                                "simple": "(default)"
+                              }, {
+                                "simple": "documents"
+                              }, {
+                                "simple": "pax"
+                              }, {
+                                "simple": "bob"
+                              }]
+                            }
+                          },
+                          "id": {
+                            "stringValue": "bob"
+                          }
+                        }
+                      }
+                    },
+                    "method": {
+                      "stringValue": "create"
+                    }
+                  }
+                }
+              },
+              "count": 1
+            }, {
+              "value": {
+                "mapValue": {
+                  "fields": {
+                    "time": {
+                      "timestampValue": "2021-05-24T07:45:22.154Z"
+                    },
+                    "auth": {
+                      "mapValue": {
+                        "fields": {
+                          "uid": {
+                            "stringValue": "alice"
+                          },
+                          "token": {
+                            "mapValue": {
+                              "fields": {
+                                "iss": {
+                                  "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                                },
+                                "aud": {
+                                  "stringValue": "firestore-emulator-example"
+                                },
+                                "iat": {
+                                  "intValue": "0"
+                                },
+                                "exp": {
+                                  "intValue": "3600"
+                                },
+                                "auth_time": {
+                                  "intValue": "0"
+                                },
+                                "sub": {
+                                  "stringValue": "alice"
+                                },
+                                "user_id": {
+                                  "stringValue": "alice"
+                                },
+                                "firebase": {
+                                  "mapValue": {
+                                    "fields": {
+                                      "sign_in_provider": {
+                                        "stringValue": "custom"
+                                      },
+                                      "identities": {
+                                        "mapValue": {
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "headers": {
+                      "mapValue": {
+                      }
+                    },
+                    "inTransaction": {
+                      "boolValue": false
+                    },
+                    "path": {
+                      "pathValue": {
+                        "segments": [{
+                          "simple": "databases"
+                        }, {
+                          "simple": "(default)"
+                        }, {
+                          "simple": "documents"
+                        }, {
+                          "simple": "pax"
+                        }, {
+                          "simple": "alice"
+                        }]
+                      }
+                    },
+                    "fields": {
+                      "nullValue": null
+                    },
+                    "method": {
+                      "stringValue": "get"
+                    }
+                  }
+                }
+              },
+              "count": 1
+            }, {
+              "value": {
+                "mapValue": {
+                  "fields": {
+                    "time": {
+                      "timestampValue": "2021-05-24T07:45:22.154Z"
+                    },
+                    "auth": {
+                      "mapValue": {
+                        "fields": {
+                          "uid": {
+                            "stringValue": "alice"
+                          },
+                          "token": {
+                            "mapValue": {
+                              "fields": {
+                                "iss": {
+                                  "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                                },
+                                "aud": {
+                                  "stringValue": "firestore-emulator-example"
+                                },
+                                "iat": {
+                                  "intValue": "0"
+                                },
+                                "exp": {
+                                  "intValue": "3600"
+                                },
+                                "auth_time": {
+                                  "intValue": "0"
+                                },
+                                "sub": {
+                                  "stringValue": "alice"
+                                },
+                                "user_id": {
+                                  "stringValue": "alice"
+                                },
+                                "firebase": {
+                                  "mapValue": {
+                                    "fields": {
+                                      "sign_in_provider": {
+                                        "stringValue": "custom"
+                                      },
+                                      "identities": {
+                                        "mapValue": {
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "headers": {
+                      "mapValue": {
+                      }
+                    },
+                    "inTransaction": {
+                      "boolValue": false
+                    },
+                    "path": {
+                      "pathValue": {
+                        "segments": [{
+                          "simple": "databases"
+                        }, {
+                          "simple": "(default)"
+                        }, {
+                          "simple": "documents"
+                        }, {
+                          "simple": "pax"
+                        }, {
+                          "simple": "bob"
+                        }]
+                      }
+                    },
+                    "fields": {
+                      "nullValue": null
+                    },
+                    "method": {
+                      "stringValue": "get"
+                    }
+                  }
+                }
+              },
+              "count": 1
+            }]
+          }]
+        }]
+      }]
+    }]
+  }, {
+    "sourcePosition": {
+      "line": 19,
+      "column": 14,
+      "currentOffset": 453,
+      "endOffset": 532
+    },
+    "values": [{
+      "value": {
+        "undefined": {
+          "sourcePosition": {
+            "line": 19,
+            "column": 41,
+            "currentOffset": 480,
+            "endOffset": 487
+          },
+          "causeMessage": "Null value error."
+        }
+      },
+      "count": 2
+    }, {
+      "value": {
+        "boolValue": false
+      },
+      "count": 1
+    }],
+    "children": [{
+      "sourcePosition": {
+        "line": 19,
+        "column": 14,
+        "currentOffset": 453,
+        "endOffset": 506
+      },
+      "values": [{
+        "value": {
+          "undefined": {
+            "sourcePosition": {
+              "line": 19,
+              "column": 41,
+              "currentOffset": 480,
+              "endOffset": 487
+            },
+            "causeMessage": "Null value error."
+          }
+        },
+        "count": 2
+      }, {
+        "value": {
+          "setValue": {
+            "values": [{
+              "stringValue": "name"
+            }]
+          }
+        },
+        "count": 1
+      }],
+      "children": [{
+        "sourcePosition": {
+          "line": 19,
+          "column": 14,
+          "currentOffset": 453,
+          "endOffset": 492
+        },
+        "values": [{
+          "value": {
+            "undefined": {
+              "sourcePosition": {
+                "line": 19,
+                "column": 41,
+                "currentOffset": 480,
+                "endOffset": 487
+              },
+              "causeMessage": "Null value error."
+            }
+          },
+          "count": 2
+        }, {
+          "value": {
+            "mapDiffValue": {
+              "keyStatuses": {
+                "name": "CHANGED"
+              }
+            }
+          },
+          "count": 1
+        }],
+        "children": [{
+          "sourcePosition": {
+            "line": 19,
+            "column": 14,
+            "currentOffset": 453,
+            "endOffset": 473
+          },
+          "values": [{
+            "value": {
+              "mapValue": {
+                "fields": {
+                  "name": {
+                    "stringValue": "Alice"
+                  }
+                }
+              }
+            },
+            "count": 1
+          }, {
+            "value": {
+              "mapValue": {
+                "fields": {
+                  "is_supervisor": {
+                    "boolValue": true
+                  }
+                }
+              }
+            },
+            "count": 1
+          }, {
+            "value": {
+              "mapValue": {
+                "fields": {
+                  "name": {
+                    "stringValue": "Alice 2"
+                  }
+                }
+              }
+            },
+            "count": 1
+          }],
+          "children": [{
+            "sourcePosition": {
+              "line": 19,
+              "column": 14,
+              "currentOffset": 453,
+              "endOffset": 468
+            },
+            "values": [{
+              "value": {
+                "mapValue": {
+                  "fields": {
+                    "data": {
+                      "mapValue": {
+                        "fields": {
+                          "name": {
+                            "stringValue": "Alice"
+                          }
+                        }
+                      }
+                    },
+                    "__name__": {
+                      "pathValue": {
+                        "segments": [{
+                          "simple": "databases"
+                        }, {
+                          "simple": "(default)"
+                        }, {
+                          "simple": "documents"
+                        }, {
+                          "simple": "pax"
+                        }, {
+                          "simple": "alice"
+                        }]
+                      }
+                    },
+                    "id": {
+                      "stringValue": "alice"
+                    }
+                  }
+                }
+              },
+              "count": 1
+            }, {
+              "value": {
+                "mapValue": {
+                  "fields": {
+                    "data": {
+                      "mapValue": {
+                        "fields": {
+                          "is_supervisor": {
+                            "boolValue": true
+                          }
+                        }
+                      }
+                    },
+                    "__name__": {
+                      "pathValue": {
+                        "segments": [{
+                          "simple": "databases"
+                        }, {
+                          "simple": "(default)"
+                        }, {
+                          "simple": "documents"
+                        }, {
+                          "simple": "pax"
+                        }, {
+                          "simple": "alice"
+                        }]
+                      }
+                    },
+                    "id": {
+                      "stringValue": "alice"
+                    }
+                  }
+                }
+              },
+              "count": 1
+            }, {
+              "value": {
+                "mapValue": {
+                  "fields": {
+                    "data": {
+                      "mapValue": {
+                        "fields": {
+                          "name": {
+                            "stringValue": "Alice 2"
+                          }
+                        }
+                      }
+                    },
+                    "__name__": {
+                      "pathValue": {
+                        "segments": [{
+                          "simple": "databases"
+                        }, {
+                          "simple": "(default)"
+                        }, {
+                          "simple": "documents"
+                        }, {
+                          "simple": "pax"
+                        }, {
+                          "simple": "alice"
+                        }]
+                      }
+                    },
+                    "id": {
+                      "stringValue": "alice"
+                    }
+                  }
+                }
+              },
+              "count": 1
+            }],
+            "children": [{
+              "sourcePosition": {
+                "line": 19,
+                "column": 14,
+                "currentOffset": 453,
+                "endOffset": 459
+              },
+              "values": [{
+                "value": {
+                  "mapValue": {
+                    "fields": {
+                      "time": {
+                        "timestampValue": "2021-05-24T07:45:21.116Z"
+                      },
+                      "auth": {
+                        "nullValue": null
+                      },
+                      "headers": {
+                        "mapValue": {
+                        }
+                      },
+                      "inTransaction": {
+                        "boolValue": true
+                      },
+                      "path": {
+                        "pathValue": {
+                          "segments": [{
+                            "simple": "databases"
+                          }, {
+                            "simple": "(default)"
+                          }, {
+                            "simple": "documents"
+                          }, {
+                            "simple": "pax"
+                          }, {
+                            "simple": "alice"
+                          }]
+                        }
+                      },
+                      "transforms": {
+                        "nullValue": null
+                      },
+                      "writeFields": {
+                        "nullValue": null
+                      },
+                      "readFields": {
+                        "nullValue": null
+                      },
+                      "resource": {
+                        "mapValue": {
+                          "fields": {
+                            "data": {
+                              "mapValue": {
+                                "fields": {
+                                  "name": {
+                                    "stringValue": "Alice"
+                                  }
+                                }
+                              }
+                            },
+                            "__name__": {
+                              "pathValue": {
+                                "segments": [{
+                                  "simple": "databases"
+                                }, {
+                                  "simple": "(default)"
+                                }, {
+                                  "simple": "documents"
+                                }, {
+                                  "simple": "pax"
+                                }, {
+                                  "simple": "alice"
+                                }]
+                              }
+                            },
+                            "id": {
+                              "stringValue": "alice"
+                            }
+                          }
+                        }
+                      },
+                      "method": {
+                        "stringValue": "create"
+                      }
+                    }
+                  }
+                },
+                "count": 1
+              }, {
+                "value": {
+                  "mapValue": {
+                    "fields": {
+                      "time": {
+                        "timestampValue": "2021-05-24T07:45:21.798Z"
+                      },
+                      "auth": {
+                        "mapValue": {
+                          "fields": {
+                            "uid": {
+                              "stringValue": "alice"
+                            },
+                            "token": {
+                              "mapValue": {
+                                "fields": {
+                                  "iss": {
+                                    "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                                  },
+                                  "aud": {
+                                    "stringValue": "firestore-emulator-example"
+                                  },
+                                  "iat": {
+                                    "intValue": "0"
+                                  },
+                                  "exp": {
+                                    "intValue": "3600"
+                                  },
+                                  "auth_time": {
+                                    "intValue": "0"
+                                  },
+                                  "sub": {
+                                    "stringValue": "alice"
+                                  },
+                                  "user_id": {
+                                    "stringValue": "alice"
+                                  },
+                                  "firebase": {
+                                    "mapValue": {
+                                      "fields": {
+                                        "sign_in_provider": {
+                                          "stringValue": "custom"
+                                        },
+                                        "identities": {
+                                          "mapValue": {
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "headers": {
+                        "mapValue": {
+                        }
+                      },
+                      "inTransaction": {
+                        "boolValue": true
+                      },
+                      "path": {
+                        "pathValue": {
+                          "segments": [{
+                            "simple": "databases"
+                          }, {
+                            "simple": "(default)"
+                          }, {
+                            "simple": "documents"
+                          }, {
+                            "simple": "pax"
+                          }, {
+                            "simple": "alice"
+                          }]
+                        }
+                      },
+                      "transforms": {
+                        "nullValue": null
+                      },
+                      "writeFields": {
+                        "nullValue": null
+                      },
+                      "readFields": {
+                        "nullValue": null
+                      },
+                      "resource": {
+                        "mapValue": {
+                          "fields": {
+                            "data": {
+                              "mapValue": {
+                                "fields": {
+                                  "is_supervisor": {
+                                    "boolValue": true
+                                  }
+                                }
+                              }
+                            },
+                            "__name__": {
+                              "pathValue": {
+                                "segments": [{
+                                  "simple": "databases"
+                                }, {
+                                  "simple": "(default)"
+                                }, {
+                                  "simple": "documents"
+                                }, {
+                                  "simple": "pax"
+                                }, {
+                                  "simple": "alice"
+                                }]
+                              }
+                            },
+                            "id": {
+                              "stringValue": "alice"
+                            }
+                          }
+                        }
+                      },
+                      "method": {
+                        "stringValue": "create"
+                      }
+                    }
+                  }
+                },
+                "count": 1
+              }, {
+                "value": {
+                  "mapValue": {
+                    "fields": {
+                      "time": {
+                        "timestampValue": "2021-05-24T07:45:22.001Z"
+                      },
+                      "auth": {
+                        "mapValue": {
+                          "fields": {
+                            "uid": {
+                              "stringValue": "alice"
+                            },
+                            "token": {
+                              "mapValue": {
+                                "fields": {
+                                  "iss": {
+                                    "stringValue": "https://securetoken.google.com/firestore-emulator-example"
+                                  },
+                                  "aud": {
+                                    "stringValue": "firestore-emulator-example"
+                                  },
+                                  "iat": {
+                                    "intValue": "0"
+                                  },
+                                  "exp": {
+                                    "intValue": "3600"
+                                  },
+                                  "auth_time": {
+                                    "intValue": "0"
+                                  },
+                                  "sub": {
+                                    "stringValue": "alice"
+                                  },
+                                  "user_id": {
+                                    "stringValue": "alice"
+                                  },
+                                  "firebase": {
+                                    "mapValue": {
+                                      "fields": {
+                                        "sign_in_provider": {
+                                          "stringValue": "custom"
+                                        },
+                                        "identities": {
+                                          "mapValue": {
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "headers": {
+                        "mapValue": {
+                        }
+                      },
+                      "inTransaction": {
+                        "boolValue": true
+                      },
+                      "path": {
+                        "pathValue": {
+                          "segments": [{
+                            "simple": "databases"
+                          }, {
+                            "simple": "(default)"
+                          }, {
+                            "simple": "documents"
+                          }, {
+                            "simple": "pax"
+                          }, {
+                            "simple": "alice"
+                          }]
+                        }
+                      },
+                      "transforms": {
+                        "nullValue": null
+                      },
+                      "writeFields": {
+                        "listValue": {
+                          "values": [{
+                            "stringValue": "name"
+                          }]
+                        }
+                      },
+                      "readFields": {
+                        "nullValue": null
+                      },
+                      "resource": {
+                        "mapValue": {
+                          "fields": {
+                            "data": {
+                              "mapValue": {
+                                "fields": {
+                                  "name": {
+                                    "stringValue": "Alice 2"
+                                  }
+                                }
+                              }
+                            },
+                            "__name__": {
+                              "pathValue": {
+                                "segments": [{
+                                  "simple": "databases"
+                                }, {
+                                  "simple": "(default)"
+                                }, {
+                                  "simple": "documents"
+                                }, {
+                                  "simple": "pax"
+                                }, {
+                                  "simple": "alice"
+                                }]
+                              }
+                            },
+                            "id": {
+                              "stringValue": "alice"
+                            }
+                          }
+                        }
+                      },
+                      "method": {
+                        "stringValue": "update"
+                      }
+                    }
+                  }
+                },
+                "count": 1
+              }]
+            }]
+          }]
+        }, {
+          "sourcePosition": {
+            "line": 19,
+            "column": 41,
+            "currentOffset": 480,
+            "endOffset": 492
+          },
+          "values": [{
+            "value": {
+              "undefined": {
+                "sourcePosition": {
+                  "line": 19,
+                  "column": 41,
+                  "currentOffset": 480,
+                  "endOffset": 487
+                },
+                "causeMessage": "Null value error."
+              }
+            },
+            "count": 2
+          }, {
+            "value": {
+              "mapValue": {
+                "fields": {
+                  "name": {
+                    "stringValue": "Alice"
+                  }
+                }
+              }
+            },
+            "count": 1
+          }],
+          "children": [{
+            "sourcePosition": {
+              "line": 19,
+              "column": 41,
+              "currentOffset": 480,
+              "endOffset": 487
+            },
+            "values": [{
+              "value": {
+                "nullValue": null
+              },
+              "count": 2
+            }, {
+              "value": {
+                "mapValue": {
+                  "fields": {
+                    "data": {
+                      "mapValue": {
+                        "fields": {
+                          "name": {
+                            "stringValue": "Alice"
+                          }
+                        }
+                      }
+                    },
+                    "__name__": {
+                      "pathValue": {
+                        "segments": [{
+                          "simple": "databases"
+                        }, {
+                          "simple": "(default)"
+                        }, {
+                          "simple": "documents"
+                        }, {
+                          "simple": "pax"
+                        }, {
+                          "simple": "alice"
+                        }]
+                      }
+                    },
+                    "id": {
+                      "stringValue": "alice"
+                    }
+                  }
+                }
+              },
+              "count": 1
+            }]
+          }]
+        }]
+      }]
+    }, {
+      "sourcePosition": {
+        "line": 19,
+        "column": 78,
+        "currentOffset": 517,
+        "endOffset": 532
+      },
+      "values": [{
+        "value": {
+          "listValue": {
+            "values": [{
+              "stringValue": "is_supervisor"
+            }]
+          }
+        },
+        "count": 3
+      }]
+    }]
+  }, {
+    "sourcePosition": {
+      "line": 23,
+      "column": 22,
+      "currentOffset": 604,
+      "endOffset": 653
+    },
+    "values": [{
+      "value": {
+        "boolValue": true
+      },
+      "count": 1
+    }, {
+      "value": {
+        "undefined": {
+          "sourcePosition": {
+            "line": 7,
+            "column": 14,
+            "currentOffset": 138,
+            "endOffset": 140
+          },
+          "causeMessage": "Service call error. Function: [get], Argument: [path_value {\n  segments {\n    simple: \"databases\"\n  }\n  segments {\n    simple: \"(default)\"\n  }\n  segments {\n    simple: \"documents\"\n  }\n  segments {\n    simple: \"pax\"\n  }\n  segments {\n    simple: \"alice\"\n  }\n}\n]."
+        }
+      },
+      "count": 1
+    }],
+    "children": [{
+      "sourcePosition": {
+        "line": 23,
+        "column": 22,
+        "currentOffset": 604,
+        "endOffset": 611
+      },
+      "values": [{
+        "value": {
+          "boolValue": true
+        },
+        "count": 2
+      }]
+    }, {
+      "sourcePosition": {
+        "line": 23,
+        "column": 36,
+        "currentOffset": 618,
+        "endOffset": 653
+      },
+      "values": [{
+        "value": {
+          "boolValue": true
+        },
+        "count": 1
+      }, {
+        "value": {
+          "undefined": {
+            "sourcePosition": {
+              "line": 7,
+              "column": 14,
+              "currentOffset": 138,
+              "endOffset": 140
+            },
+            "causeMessage": "Service call error. Function: [get], Argument: [path_value {\n  segments {\n    simple: \"databases\"\n  }\n  segments {\n    simple: \"(default)\"\n  }\n  segments {\n    simple: \"documents\"\n  }\n  segments {\n    simple: \"pax\"\n  }\n  segments {\n    simple: \"alice\"\n  }\n}\n]."
+          }
+        },
+        "count": 1
+      }],
+      "children": [{
+        "sourcePosition": {
+          "line": 23,
+          "column": 37,
+          "currentOffset": 619,
+          "endOffset": 636
+        },
+        "values": [{
+          "value": {
+            "boolValue": true
+          },
+          "count": 1
+        }, {
+          "value": {
+            "boolValue": false
+          },
+          "count": 1
+        }],
+        "children": [{
+          "sourcePosition": {
+            "line": 23,
+            "column": 50,
+            "currentOffset": 632,
+            "endOffset": 636
+          },
+          "values": [{
+            "value": {
+              "stringValue": "alice"
+            },
+            "count": 1
+          }, {
+            "value": {
+              "stringValue": "bob"
+            },
+            "count": 1
+          }]
+        }]
+      }, {
+        "sourcePosition": {
+          "line": 23,
+          "column": 60,
+          "currentOffset": 642,
+          "endOffset": 653
+        },
+        "values": [{
+          "value": {
+          },
+          "count": 1
+        }, {
+          "value": {
+            "undefined": {
+              "sourcePosition": {
+                "line": 7,
+                "column": 14,
+                "currentOffset": 138,
+                "endOffset": 140
+              },
+              "causeMessage": "Service call error. Function: [get], Argument: [path_value {\n  segments {\n    simple: \"databases\"\n  }\n  segments {\n    simple: \"(default)\"\n  }\n  segments {\n    simple: \"documents\"\n  }\n  segments {\n    simple: \"pax\"\n  }\n  segments {\n    simple: \"alice\"\n  }\n}\n]."
+            }
+          },
+          "count": 1
+        }]
+      }]
+    }]
+  }, {
+    "sourcePosition": {
+      "line": 24,
+      "column": 23,
+      "currentOffset": 681,
+      "endOffset": 757
+    },
+    "values": [{
+      "value": {
+        "undefined": {
+          "sourcePosition": {
+            "line": 11,
+            "column": 14,
+            "currentOffset": 284,
+            "endOffset": 290
+          },
+          "causeMessage": "Null value error."
+        }
+      },
+      "count": 1
+    }, {
+      "value": {
+        "undefined": {
+          "sourcePosition": {
+            "line": 19,
+            "column": 41,
+            "currentOffset": 480,
+            "endOffset": 487
+          },
+          "causeMessage": "Null value error."
+        }
+      },
+      "count": 1
+    }, {
+      "value": {
+        "boolValue": true
+      },
+      "count": 2
+    }, {
+      "value": {
+        "undefined": {
+          "sourcePosition": {
+            "line": 7,
+            "column": 14,
+            "currentOffset": 138,
+            "endOffset": 140
+          },
+          "causeMessage": "Service call error. Function: [get], Argument: [path_value {\n  segments {\n    simple: \"databases\"\n  }\n  segments {\n    simple: \"(default)\"\n  }\n  segments {\n    simple: \"documents\"\n  }\n  segments {\n    simple: \"pax\"\n  }\n  segments {\n    simple: \"alice\"\n  }\n}\n]."
+        }
+      },
+      "count": 1
+    }],
+    "children": [{
+      "sourcePosition": {
+        "line": 24,
+        "column": 23,
+        "currentOffset": 681,
+        "endOffset": 688
+      },
+      "values": [{
+        "value": {
+          "undefined": {
+            "sourcePosition": {
+              "line": 11,
+              "column": 14,
+              "currentOffset": 284,
+              "endOffset": 290
+            },
+            "causeMessage": "Null value error."
+          }
+        },
+        "count": 1
+      }, {
+        "value": {
+          "boolValue": true
+        },
+        "count": 4
+      }]
+    }, {
+      "sourcePosition": {
+        "line": 24,
+        "column": 37,
+        "currentOffset": 695,
+        "endOffset": 757
+      },
+      "values": [{
+        "value": {
+          "undefined": {
+            "sourcePosition": {
+              "line": 15,
+              "column": 23,
+              "currentOffset": 374,
+              "endOffset": 380
+            },
+            "causeMessage": "Null value error."
+          }
+        },
+        "count": 1
+      }, {
+        "value": {
+          "undefined": {
+            "sourcePosition": {
+              "line": 19,
+              "column": 41,
+              "currentOffset": 480,
+              "endOffset": 487
+            },
+            "causeMessage": "Null value error."
+          }
+        },
+        "count": 1
+      }, {
+        "value": {
+          "boolValue": true
+        },
+        "count": 2
+      }, {
+        "value": {
+          "undefined": {
+            "sourcePosition": {
+              "line": 7,
+              "column": 14,
+              "currentOffset": 138,
+              "endOffset": 140
+            },
+            "causeMessage": "Service call error. Function: [get], Argument: [path_value {\n  segments {\n    simple: \"databases\"\n  }\n  segments {\n    simple: \"(default)\"\n  }\n  segments {\n    simple: \"documents\"\n  }\n  segments {\n    simple: \"pax\"\n  }\n  segments {\n    simple: \"alice\"\n  }\n}\n]."
+          }
+        },
+        "count": 1
+      }],
+      "children": [{
+        "sourcePosition": {
+          "line": 24,
+          "column": 38,
+          "currentOffset": 696,
+          "endOffset": 738
+        },
+        "values": [{
+          "value": {
+            "undefined": {
+              "sourcePosition": {
+                "line": 15,
+                "column": 23,
+                "currentOffset": 374,
+                "endOffset": 380
+              },
+              "causeMessage": "Null value error."
+            }
+          },
+          "count": 1
+        }, {
+          "value": {
+            "undefined": {
+              "sourcePosition": {
+                "line": 19,
+                "column": 41,
+                "currentOffset": 480,
+                "endOffset": 487
+              },
+              "causeMessage": "Null value error."
+            }
+          },
+          "count": 1
+        }, {
+          "value": {
+            "boolValue": false
+          },
+          "count": 2
+        }, {
+          "value": {
+            "boolValue": true
+          },
+          "count": 1
+        }],
+        "children": [{
+          "sourcePosition": {
+            "line": 24,
+            "column": 39,
+            "currentOffset": 697,
+            "endOffset": 714
+          },
+          "values": [{
+            "value": {
+              "undefined": {
+                "sourcePosition": {
+                  "line": 15,
+                  "column": 23,
+                  "currentOffset": 374,
+                  "endOffset": 380
+                },
+                "causeMessage": "Null value error."
+              }
+            },
+            "count": 1
+          }, {
+            "value": {
+              "boolValue": true
+            },
+            "count": 2
+          }, {
+            "value": {
+              "boolValue": false
+            },
+            "count": 2
+          }],
+          "children": [{
+            "sourcePosition": {
+              "line": 24,
+              "column": 52,
+              "currentOffset": 710,
+              "endOffset": 714
+            },
+            "values": [{
+              "value": {
+                "stringValue": "alice"
+              },
+              "count": 4
+            }, {
+              "value": {
+                "stringValue": "bob"
+              },
+              "count": 1
+            }]
+          }]
+        }, {
+          "sourcePosition": {
+            "line": 24,
+            "column": 62,
+            "currentOffset": 720,
+            "endOffset": 738
+          },
+          "values": [{
+            "value": {
+              "undefined": {
+                "sourcePosition": {
+                  "line": 19,
+                  "column": 41,
+                  "currentOffset": 480,
+                  "endOffset": 487
+                },
+                "causeMessage": "Null value error."
+              }
+            },
+            "count": 2
+          }, {
+            "value": {
+            },
+            "count": 2
+          }, {
+            "value": {
+              "boolValue": true
+            },
+            "count": 1
+          }],
+          "children": [{
+            "sourcePosition": {
+              "line": 24,
+              "column": 63,
+              "currentOffset": 721,
+              "endOffset": 738
+            },
+            "values": [{
+              "value": {
+                "undefined": {
+                  "sourcePosition": {
+                    "line": 19,
+                    "column": 41,
+                    "currentOffset": 480,
+                    "endOffset": 487
+                  },
+                  "causeMessage": "Null value error."
+                }
+              },
+              "count": 2
+            }, {
+              "value": {
+              },
+              "count": 2
+            }, {
+              "value": {
+                "boolValue": false
+              },
+              "count": 1
+            }]
+          }]
+        }]
+      }, {
+        "sourcePosition": {
+          "line": 24,
+          "column": 88,
+          "currentOffset": 746,
+          "endOffset": 757
+        },
+        "values": [{
+          "value": {
+            "undefined": {
+              "sourcePosition": {
+                "line": 7,
+                "column": 57,
+                "currentOffset": 181,
+                "endOffset": 187
+              },
+              "causeMessage": "Null value error."
+            }
+          },
+          "count": 1
+        }, {
+          "value": {
+            "undefined": {
+              "sourcePosition": {
+                "line": 7,
+                "column": 14,
+                "currentOffset": 138,
+                "endOffset": 140
+              },
+              "causeMessage": "Null value error."
+            }
+          },
+          "count": 1
+        }, {
+          "value": {
+            "boolValue": true
+          },
+          "count": 1
+        }, {
+          "value": {
+          },
+          "count": 1
+        }, {
+          "value": {
+            "undefined": {
+              "sourcePosition": {
+                "line": 7,
+                "column": 14,
+                "currentOffset": 138,
+                "endOffset": 140
+              },
+              "causeMessage": "Service call error. Function: [get], Argument: [path_value {\n  segments {\n    simple: \"databases\"\n  }\n  segments {\n    simple: \"(default)\"\n  }\n  segments {\n    simple: \"documents\"\n  }\n  segments {\n    simple: \"pax\"\n  }\n  segments {\n    simple: \"alice\"\n  }\n}\n]."
+            }
+          },
+          "count": 1
+        }]
+      }]
+    }]
+  }, {
+    "sourcePosition": {
+      "line": 28,
+      "column": 29,
+      "currentOffset": 845,
+      "endOffset": 894
+    },
+    "children": [{
+      "sourcePosition": {
+        "line": 28,
+        "column": 29,
+        "currentOffset": 845,
+        "endOffset": 852
+      }
+    }, {
+      "sourcePosition": {
+        "line": 28,
+        "column": 43,
+        "currentOffset": 859,
+        "endOffset": 894
+      },
+      "children": [{
+        "sourcePosition": {
+          "line": 28,
+          "column": 44,
+          "currentOffset": 860,
+          "endOffset": 877
+        },
+        "children": [{
+          "sourcePosition": {
+            "line": 28,
+            "column": 57,
+            "currentOffset": 873,
+            "endOffset": 877
+          }
+        }]
+      }, {
+        "sourcePosition": {
+          "line": 28,
+          "column": 67,
+          "currentOffset": 883,
+          "endOffset": 894
+        }
+      }]
+    }]
+  }, {
+    "sourcePosition": {
+      "line": 32,
+      "column": 29,
+      "currentOffset": 972,
+      "endOffset": 1021
+    },
+    "children": [{
+      "sourcePosition": {
+        "line": 32,
+        "column": 29,
+        "currentOffset": 972,
+        "endOffset": 979
+      }
+    }, {
+      "sourcePosition": {
+        "line": 32,
+        "column": 43,
+        "currentOffset": 986,
+        "endOffset": 1021
+      },
+      "children": [{
+        "sourcePosition": {
+          "line": 32,
+          "column": 44,
+          "currentOffset": 987,
+          "endOffset": 1004
+        },
+        "children": [{
+          "sourcePosition": {
+            "line": 32,
+            "column": 57,
+            "currentOffset": 1000,
+            "endOffset": 1004
+          }
+        }]
+      }, {
+        "sourcePosition": {
+          "line": 32,
+          "column": 67,
+          "currentOffset": 1010,
+          "endOffset": 1021
+        }
+      }]
+    }]
+  }, {
+    "sourcePosition": {
+      "line": 36,
+      "column": 21,
+      "currentOffset": 1088,
+      "endOffset": 1113
+    },
+    "children": [{
+      "sourcePosition": {
+        "line": 36,
+        "column": 21,
+        "currentOffset": 1088,
+        "endOffset": 1095
+      }
+    }, {
+      "sourcePosition": {
+        "line": 36,
+        "column": 35,
+        "currentOffset": 1102,
+        "endOffset": 1113
+      }
+    }]
+  }, {
+    "sourcePosition": {
+      "line": 39,
+      "column": 21,
+      "currentOffset": 1182,
+      "endOffset": 1207
+    },
+    "children": [{
+      "sourcePosition": {
+        "line": 39,
+        "column": 21,
+        "currentOffset": 1182,
+        "endOffset": 1189
+      }
+    }, {
+      "sourcePosition": {
+        "line": 39,
+        "column": 35,
+        "currentOffset": 1196,
+        "endOffset": 1207
+      }
+    }]
+  }]
+};
+
+const REPORT_LIMIT_SIZE = 15
+
+window.onload = function() {
+  if (data.rules.files.length == 1) {
+    document.body.appendChild(buildFormattedReport(data.report || [], data.rules.files[0].content))
+  } else {
+    document.body.appendChild(document.createTextNode('Only single-file rules supported. ' +
+    'If you encounter this please visit https://github.com/firebase/firebase-tools/issues'))
+  }
+};
+
+/**
+ * Builds the html block with span elements for rule visualization.
+ *
+ * @param expressionList The list of expression blocks.
+ * @param ruleString The full text of the rules with newlines and special characters escaped.
+ * @return A <pre> html element with <span></span> around expressions and subexpressions within
+ *     .write, .read, and .validate tokens so that they can be selected.
+ */
+function buildFormattedReport(expressionList, ruleString) {
+  const elements = Object.keys(expressionList).map((key) => {
+    return mapExpressionBlock(expressionList[key], ruleString)
+  })
+  const withText = interpolateTextNodes(
+    elements,
+    ruleString,
+    0,
+    ruleString.length
+  )
+  var preElement = document.createElement('pre')
+  withText.forEach((element) => preElement.appendChild(element.element))
+  return preElement
+}
+
+/**
+ * Traverses an expression block.
+ *
+ * Each expression needs to be wrapped in a span and so it's children need to be immediately
+ * resolved so they can be added to the element.
+ *
+ * @param expressionBlock The current recursive chunk of expression data.
+ * @param ruleString The full text of the rules with newlines and special characters escaped.
+ * @return A single object with at least the keys start, end, and element. Element is the span
+ *    element for that [sub]expression. The span element should have all it's children
+ *    already added.
+ */
+function mapExpressionBlock(expressionBlock, ruleString) {
+  const start = expressionBlock.sourcePosition.currentOffset
+  const end = expressionBlock.sourcePosition.endOffset + 1
+  const onlyChildSpans = (expressionBlock.children || []).map(
+    (child) => mapExpressionBlock(child, ruleString)
+  )
+  const allChildren = interpolateTextNodes(
+    onlyChildSpans,
+    ruleString,
+    start,
+    end,
+    true
+  )
+  var span = document.createElement('span')
+  allChildren.forEach((child) => {
+    span.appendChild(child.element)
+  })
+  span.classList.add('coverage-expr')
+  span.title = buildValueString(expressionBlock.values);
+  return {
+    element: span,
+    start: start,
+    end: end
+  }
+}
+
+/**
+ * The formatted report data has information about where subexpression are located. It does not,
+ * however, have information about text around these expressions. This function takes a formatted
+ * list of spans (representing expressions) and puts surrounding text into text elements and
+ * returns the list of all elements in that given text-area.
+ *
+ * @param objs the list of spans to have their bounds interpolated. Each element in the list should
+ *    formatted with the keys start, end, and element.
+ * @param ruleString The full text of the rules with newlines and special characters escaped.
+ * @param optStart An optional start index to start gathering text-elements from.
+ * @param optEnd An optional end index to finish gathering text-elements at.
+ * @param whether to remove newlines from the text values.
+ * @return An interpolated list with all indices from start to end of the ruleString being
+ *    included in either a span or a text element.
+ */
+function interpolateTextNodes(objs, ruleString, start = null, end = null, removeNewLines = false) {
+  // Arrays so null objects aren't appended (options)
+  const expressionStart = start !== null ? [{'end': start}] : []
+  const expressionEnd = end !== null ? [{'start': end}] : []
+  const sortedInnerBlocks = (objs || []).sort((a, b) => (a['start'] - b['start']))
+  const blocksWithBounds = [].concat(expressionStart, sortedInnerBlocks, expressionEnd)
+  const interpolatedBlocks = blocksWithBounds.reduce((allChildren, child, idx) => {
+    if (allChildren && allChildren.length) {
+      const lastEnd = allChildren[allChildren.length - 1]['end']
+      const thisStart = child['start']
+      // This is an array so that we don't append null objects
+      if (lastEnd < thisStart) {
+        const text = ruleString.substring(lastEnd, thisStart)
+        const textElement = [{
+          element: document.createTextNode(removeNewLines ? text.replace(/\n\s*/g,' ') : text),
+          'start': allChildren[allChildren.length - 1]['end'],
+          'end': child['start']
+        }]
+        return allChildren.concat(textElement, child)
+      }
+    }
+    return allChildren.concat(child)
+  }, [])
+  return interpolatedBlocks.filter(
+    (child) => child['start'] !== undefined && child['end'] !== undefined
+  )
+}
+
+/**
+ * Creates the mouse-over text for each span.
+ *
+ * @param values The array of value objects formatted as {value: **, count: **}.
+ * @return A single string for the mouse-over text.
+ */
+function buildValueString(values) {
+  if (!values || !values.length) {
+    return 'Expression never evaluated'
+  } else if (values.length >= REPORT_LIMIT_SIZE) {
+    const allCounts = values.reduce((acc, obj) => acc + obj.count, 0)
+    return `${values.length} distinct items returned over ${allCounts} times`
+  } else {
+    return values.map(({value, count}) => {
+      const allowedTypes = ['nullValue', 'boolValue', 'intValue', 'floatValue', 'stringValue',
+        'bytesValue', 'durationValue', 'timestampValue', 'latlngValue', 'pathValue']
+      const compressedTypes = ['mapValue', 'listValue', 'constraintValue']
+      const typeAllowed = allowedTypes.filter(type => value[type] !== undefined).length == 1
+      const typeCompressed = compressedTypes.filter(type => value[type] !== undefined).length >= 1
+      // Format is value = {returnType: returnValue}
+      // A returnType of undefined is an error. Unfortunately the field is called undefined.
+      if (value['undefined']) {
+        // Expression evaluated to error
+        return `Error '${value.undefined.causeMessage}' occurred ${count} time(s)`
+      } else if (typeCompressed) {
+        // These types are recursive and are hard to read
+        return `[object Object] returned ${count} time(s)`
+      } else if (typeAllowed) {
+        // The response is a simple literal
+        // Object.values is not ES2015
+        const realValue = Object.keys(value).map((key) => value[key])[0]
+        return `Value ${JSON.stringify(realValue)} returned ${count} time(s)`
+      } else if (Object.keys(value).length === 0) {
+        // Clause not evaluated because of short-circuit.
+        return `Expression short-circuited ${count} time(s)`
+      } else {
+        // For a properly formatted response each value should have one type.
+        console.error('Found invalid expression-return type.')
+      }
+    }).join('\n')
+  }
+}
+</script>

@@ -1,14 +1,42 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /pax/{paxId}/{document=**}  {
-      allow read, write: if request.auth != null && (paxId == request.auth.token.sub || get(/databases/$(database)/documents/pax/$(request.auth.token.sub)).data.is_supervisor == true);
+
+    
+    function isSupervisor() {
+      return get(/databases/$(database)/documents/pax/$(request.auth.token.sub)).data.is_supervisor == true;
     }
+    
+    function signedIn() {
+      return request.auth.uid != null;
+    }
+
+    function isOwnPaxData(paxId) {
+      return paxId == request.auth.token.sub
+    }
+
+    function isAccessSupervisor() {
+      return request.resource.data.diff(resource.data).affectedKeys().hasAny(['is_supervisor'])
+    }
+
+    match /pax/{paxId}/{document=**}  {
+      allow read: if signedIn() && (isOwnPaxData(paxId) || isSupervisor());
+      allow write: if signedIn() && ((isOwnPaxData(paxId) && !isAccessSupervisor()) || isSupervisor());
+    }
+
+    match /pax/{paxId}/requests/{requestId}  {
+      allow read, write: if signedIn() && (isOwnPaxData(paxId) || isSupervisor());
+    }
+
+		match /pax/{paxId}/days/{dayId}  {
+      allow read, write: if signedIn() && (isOwnPaxData(paxId) || isSupervisor());
+    }
+
     match /{path=**}/days/{doc} {
-    	allow read: if request.auth != null && get(/databases/$(database)/documents/pax/$(request.auth.token.sub)).data.is_supervisor == true;
+    	allow read: if signedIn() && isSupervisor();
     }
     match /{path=**}/requests/{doc} {
-    	allow read: if request.auth != null && get(/databases/$(database)/documents/pax/$(request.auth.token.sub)).data.is_supervisor == true;
+    	allow read: if signedIn() && isSupervisor();
     }
 
   }

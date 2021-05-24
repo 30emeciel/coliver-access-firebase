@@ -1,3 +1,13 @@
 steps:
 - name: gcr.io/trentiemeciel/firebase
+  entrypoint: npm
+  args:
+    - install
+- name: gcr.io/trentiemeciel/firebase
+  args:
+  - emulators:exec
+  - --only=firestore
+  - "npm run test-firestore"
+ 
+- name: gcr.io/trentiemeciel/firebase
   args: ['deploy', '--project=$PROJECT_ID', '-m', '$TAG_NAME build $SHORT_SHA']
